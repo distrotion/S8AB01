@@ -43,6 +43,7 @@ router.post('/RegisterPO', async (req, res) => {
             "PLANT":"TRITRATING",
             "MASTERdb":TRITRATINGserver,
             "MATDATA":TRITRATING[0],
+            "ProductName":TRITRATING[0]['ProductName'],
         };
     }else if(COILCOATING.length > 0){
         data = {
@@ -51,6 +52,7 @@ router.post('/RegisterPO', async (req, res) => {
             "PLANT":"COILCOATING",
             "MASTERdb":COILCOATINGserver,
             "MATDATA":COILCOATING[0],
+            "ProductName":COILCOATING[0]['ProductName'],
         };
     }else if(HYDROPHILIC.length > 0){
         data = {
@@ -59,6 +61,7 @@ router.post('/RegisterPO', async (req, res) => {
             "PLANT":"HYDROPHILIC",
             "MASTERdb":HYDROPHILICserver,
             "MATDATA":HYDROPHILIC[0],
+            "ProductName":HYDROPHILIC[0]['ProductName'],
         };
     }else if(PLX.length > 0){
         data = {
@@ -67,6 +70,7 @@ router.post('/RegisterPO', async (req, res) => {
             "PLANT":"PLX",
             "MASTERdb":PLXserver,
             "MATDATA":PLX[0],
+            "ProductName":PLX[0]['ProductName'],
         };
     }else if(PREMIX.length > 0){
         data = {
@@ -75,6 +79,7 @@ router.post('/RegisterPO', async (req, res) => {
             "PLANT":"PREMIX",
             "MASTERdb":PREMIXserver,
             "MATDATA":PREMIX[0],
+            "ProductName":PREMIX[0]['ProductName'],
         };
     }else if(POWDER.length > 0){
         data = {
@@ -83,6 +88,7 @@ router.post('/RegisterPO', async (req, res) => {
             "PLANT":"POWDER",
             "MASTERdb":POWDERserver,
             "MATDATA":POWDER[0],
+            "ProductName":POWDER[0]['ProductName'],
         };
     }
     else if(LIQUID.length > 0){
@@ -92,6 +98,7 @@ router.post('/RegisterPO', async (req, res) => {
             "PLANT":"LIQUID",
             "MASTERdb":LIQUIDserver,
             "MATDATA":LIQUID[0],
+            "ProductName":LIQUID[0]['ProductName'],
         };
     }
 
@@ -101,6 +108,7 @@ router.post('/RegisterPO', async (req, res) => {
         "PO":PO,
         "PLANT":data["PLANT"],
         "MASTERdb":data["MASTERdb"],
+        "ProductName":data["ProductName"],
         "SumStatus" : "IP",
         "DEP":"STAFF"
     };

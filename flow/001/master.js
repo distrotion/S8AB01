@@ -234,7 +234,7 @@ router.post('/upselectcolor', async (req, res) => {
 
     if(check.length === 0){
 
-        let check2 = await mongodb.find(COLORwords,dbin,{"value":input['value'] });
+        let check2 = await mongodb.find(COLORwords,dbin,{$and:[{"value":input['value']},{"plant":input['plant']}] });
         if(check2.length > 0){
 
         }else{
@@ -245,7 +245,7 @@ router.post('/upselectcolor', async (req, res) => {
         
     }else{
         //
-        let upd = await mongodb.update(COLORwords,dbin,{ "WID":input['WID'] }, { $set: {"value":input['value']} });
+        let upd = await mongodb.update(COLORwords,dbin,{ "WID":input['WID'] }, { $set: {"value":input['value'],"code":input['code'] ,"plant":input['plant']} });
     }
 
     let output = await mongodb.find(COLORwords,dbin,{});
@@ -285,7 +285,7 @@ router.post('/upselectappearance', async (req, res) => {
         
     }else{
         //
-        let upd = await mongodb.update(APPEARANCEwords,dbin,{ "WID":input['WID'] }, { $set: {"value":input['value']} });
+        let upd = await mongodb.update(APPEARANCEwords,dbin,{ "WID":input['WID'] }, { $set: {"value":input['value'],"code":input['code'] ,"plant":input['plant']} });
     }
 
     let output = await mongodb.find(APPEARANCEwords,dbin,{});
@@ -298,8 +298,8 @@ router.post('/selectdropdown', async (req, res) => {
     console.log(req.body);
     let input = req.body;
     //-------------------------------------
-    let output1 = await mongodb.find(COLORwords,dbin,{});
-    let output2 = await mongodb.find(APPEARANCEwords,dbin,{});
+    let output1 = await mongodb.find(COLORwords,dbin,{"plant":input['plant']});
+    let output2 = await mongodb.find(APPEARANCEwords,dbin,{"plant":input['plant']});
     let output3 = await mongodb.find('INSTRUMENT','data',{});
 
     output={

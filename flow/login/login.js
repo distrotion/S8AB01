@@ -35,13 +35,14 @@ router.post('/login', async (req, res) => {
     //-------------------------------------
     let output = {"return":'NOK'}
     let findDB = await mongodb.find(Auth,user,{"ID":input['ID']});
-    console.log(findDB[0]['PASS']);
+    console.log(findDB['PASS']);
     console.log(input['PASS']);
     if(findDB.length > 0){
 
         if(findDB[0]['PASS'] === input['PASS']){
             output = {
                 "ID":findDB[0]['ID'],
+                "NAME":findDB[0]['NAME'],
                 "LV":findDB[0]['LV'] || '1',
                 "return":'OK'
             }
