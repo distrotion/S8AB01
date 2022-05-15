@@ -15,10 +15,11 @@ router.post('/passtomana', async (req, res) => {
     //-------------------------------------
     let output = { "return": 'NOK' }
     let poid = `${input['poid']}`
+    let ID = `${input['ID']}`
     let plant = input['plant']
     let SENDTOMANAdate= day;
 
-    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: {"DEP":"MANA","SENDTOMANAdate":SENDTOMANAdate} });
+    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: {"DEP":"MANA","SENDTOMANAdate":SENDTOMANAdate,"STAFF":ID} });
 
     let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [ { "POID": poid } , { "DEP": "MANA" }] }); 
     if(find.length > 0){
@@ -37,10 +38,11 @@ router.post('/passtoscada', async (req, res) => {
     //-------------------------------------
     let output = { "return": 'NOK' }
     let poid = `${input['poid']}`
+    let ID = `${input['ID']}`
     let plant = input['plant']
     let SENDTOSCADAdate= day;
 
-    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: {"DEP":"SCADA","SENDTOSCADAdate":SENDTOSCADAdate} });
+    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: {"DEP":"SCADA","SENDTOSCADAdate":SENDTOSCADAdate,"MGR":ID} });
 
     let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [ { "POID": poid } , { "DEP": "SCADA" }] }); 
     if(find.length > 0){
@@ -60,10 +62,11 @@ router.post('/passtoscadare', async (req, res) => {
     //-------------------------------------
     let output = { "return": 'NOK' }
     let poid = `${input['poid']}`
+    let ID = `${input['ID']}`
     let plant = input['plant']
     let SENDTOSCADAdateRE= day;
 
-    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: {"DEP":"SCADA","SENDTOSCADAdateRE":SENDTOSCADAdateRE} });
+    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: {"DEP":"SCADA","SENDTOSCADAdateRE":SENDTOSCADAdateRE,"RE-STAFF":ID} });
 
     let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [ { "POID": poid } , { "DEP": "SCADA" }] }); 
     if(find.length > 0){
