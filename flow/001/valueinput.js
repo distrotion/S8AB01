@@ -207,8 +207,8 @@ router.post('/semiauto-valueinputget', async (req, res) => {
         res.json(output);
     }
 
-    let output1 = await mongodb.find(COLORwords,dbin,{});
-    let output2 = await mongodb.find(APPEARANCEwords,dbin,{});
+    let output1 = await mongodb.find(COLORwords,dbin,{"plant":plant});
+    let output2 = await mongodb.find(APPEARANCEwords,dbin,{"plant":plant});
 
     let query = await mongodb.find(`${plant}dbMAIN`,'MAIN',{"POID":poid});
     if(query.length>0){
