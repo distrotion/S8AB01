@@ -86,6 +86,19 @@ router.post('/passtoscadare', async (req, res) => {
     let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [ { "POID": poid } , { "DEP": "SCADA" }] }); 
     if(find.length > 0){
         output = { "return": 'OK' }
+        request.post(
+            'http://127.0.0.1:2500/new_scada_premix',
+            {
+                json: {
+                    "poid": poid,
+                }
+            },
+            function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body);
+                }
+            }
+        );
     }
     
 
