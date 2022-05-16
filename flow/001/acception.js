@@ -2,6 +2,7 @@ const e = require("express");
 const express = require("express");
 const router = express.Router();
 let mongodb = require('../../function/mongodb');
+var request = require('request');
 
 const d = new Date();
 let day = d;
@@ -50,7 +51,7 @@ router.post('/passtoscada', async (req, res) => {
     if(find.length > 0){
         output = { "return": 'OK' }
         request.post(
-            'http://127.0.0.1:2500/new_scada_premix',
+            `http://127.0.0.1:2500/new_scada_${plant}`,
             {
                 json: {
                     "poid": poid,
@@ -87,7 +88,7 @@ router.post('/passtoscadare', async (req, res) => {
     if(find.length > 0){
         output = { "return": 'OK' }
         request.post(
-            'http://127.0.0.1:2500/new_scada_premix',
+            `http://127.0.0.1:2500/new_scada_${plant}`,
             {
                 json: {
                     "poid": poid,
