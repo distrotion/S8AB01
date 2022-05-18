@@ -82,10 +82,12 @@ router.post('/passtoscadare', async (req, res) => {
     let ID = `${input['ID']}`
     let plant = input['plant']
     let SENDTOSCADAdateRE= day;
+    
 
     let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: {"DEP":"SCADA","SENDTOSCADAdateRE":SENDTOSCADAdateRE,"RE-STAFF":ID} });
 
     let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [ { "POID": poid } , { "DEP": "SCADA" }] }); 
+
     if(find.length > 0){
         console.log(`http://127.0.0.1:2500/new_scada_${plant}`);
         output = { "return": 'OK' }
