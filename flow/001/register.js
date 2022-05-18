@@ -12,6 +12,15 @@ let POWDERserver = 'POWDER_MASTER';
 let LIQUIDserver = 'LIQUID_MASTER';
 let dbin = 'specification';
 
+let PREMIXdbMAIN = 'PREMIXdbMAIN';
+let COILCOATINGdbMAIN = 'COILCOATINGdbMAIN';
+let HYDROPHILICdbMAIN = 'HYDROPHILICdbMAIN';
+let PLXdbMAIN = 'PLXdbMAIN';
+let TRITRATINGdbMAIN = 'TRITRATINGdbMAIN';
+let POWDERdbMAIN = 'POWDERdbMAIN';
+let LIQUIDdbMAIN = 'LIQUIDdbMAIN';
+let dbinMAIN = 'MAIN'
+
 const d = new Date();
 let day = d;
 
@@ -183,19 +192,89 @@ router.post('/RegisterPO', async (req, res) => {
         let check = await mongodb.find(`${neworder['PLANT']}dbMAIN`,'MAIN',{"POID":neworder['POID'] });
 
         if(check.length === 0){
+            console.log("<<<<<<<")
+            neworder['time'] = check.length+1;
             neworder['date'] = day;
             neworder['checklist'] =checklist;
             var ins = await mongodb.insertMany(`${neworder['PLANT']}dbMAIN`,'MAIN',[neworder]);
             output = `The order have added to PLANT:${data["PLANT"]}`;
         }else{
             // let upd = await mongodb.update(`${neworder['PLANT']}dbMAIN`,'MAIN',{ "POID":neworder['POID'] }, { $set: neworder });
-            output = `The order have already had in DB`;
+            
+            let check2 = await mongodb.find(`${neworder['PLANT']}dbMAIN`,'MAIN',{$and:[{"POID":neworder['POID']},{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]});
+            if(check2.length === 0){
+                neworder['time'] = check.length+1;
+                neworder['date'] = day;
+                neworder['checklist'] =checklist;
+                var ins2 = await mongodb.insertMany(`${neworder['PLANT']}dbMAIN`,'MAIN',[neworder]);
+            console.log(">>>>>>>")
+                output = `The order have added to PLANT:${data["PLANT"]}`;
+              
+            }else{
+                output = `The order have already had in DB`;
+            }
+            
         }
         
     }else{
 
     }
     
+
+    res.json(output);
+});
+
+router.post('/rejectitem', async (req, res) => {
+    ///-------------------------------------
+    console.log(req.body);
+    let input = req.body;
+    //-------------------------------------
+    let poid = `${input['PO']}`
+    let ID = `${input['ID']}`
+    let plant = '';
+
+    let output = { "return": 'NOK' };
+    let PREMIX = await mongodb.find(PREMIXdbMAIN, dbinMAIN, { $and: [ { "POID": poid },{ "DEP": "STAFF" }] }); //{ "SumStatus": "IP" }, { "DEP": "STAFF" }
+    if (PREMIX.length > 0) {
+        plant='PREMIX';
+    }
+    let COILCOATING = await mongodb.find(COILCOATINGdbMAIN, dbinMAIN, { $and: [ { "POID": poid },{ "DEP": "STAFF" }] });
+    if (COILCOATING.length > 0) {
+        plant='COILCOATING';
+    }
+    let HYDROPHILIC = await mongodb.find(HYDROPHILICdbMAIN, dbinMAIN, { $and: [ { "POID": poid },{ "DEP": "STAFF" }] });
+    if (HYDROPHILIC.length > 0) {
+        plant='HYDROPHILIC';
+    }
+    let PLX = await mongodb.find(PLXdbMAIN, dbinMAIN, { $and: [ { "POID": poid },{ "DEP": "STAFF" }] });
+    if (PLX.length > 0) {
+        plant='PLX';
+    }
+    let TRITRATING = await mongodb.find(TRITRATINGdbMAIN, dbinMAIN, { $and: [ { "POID": poid },{ "DEP": "STAFF" }] });
+    if (TRITRATING.length > 0) {
+        plant='TRITRATING';
+    }
+
+    let POWDER = await mongodb.find(POWDERdbMAIN, dbinMAIN, { $and: [ { "POID": poid },{ "DEP": "STAFF" }] });
+    if (POWDER.length > 0) {
+        plant='POWDER';
+    }
+    let LIQUID = await mongodb.find(LIQUIDdbMAIN, dbinMAIN, { $and: [ { "POID": poid },{ "DEP": "STAFF" }] });
+    if (LIQUID.length > 0) {
+        plant='LIQUID';
+    }
+
+    console.log(plant);
+
+    let find01 = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [ { "POID": poid }] }); 
+
+    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [ { "POID": poid },{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}] }, { $set: {"time":find01.length,"SumStatus":"REJECT","DEP": "REJECT","STAFF-REJECT":ID } });
+
+    let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [ { "POID": poid } , { "SumStatus":"REJECT" }] }); 
+    if(find.length > 0){
+        output = { "return": 'OK' }
+    }
+
 
     res.json(output);
 });

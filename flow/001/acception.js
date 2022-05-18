@@ -108,18 +108,6 @@ router.post('/passtoscadare', async (req, res) => {
 });
 
 
-router.post('/rejectitem', async (req, res) => {
-
-    let output = { "return": 'NOK' }
-    let poid = `${input['poid']}`
-    let plant = input['plant']
-
-    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: {"DEP":"REJECT"} });
-
-
-    res.json(output);
-});
-
 router.post('/completetitem', async (req, res) => {
 
     let output = { "return": 'NOK' }

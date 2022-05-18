@@ -15,6 +15,8 @@ let dbin = 'specification';
 let COLORwords = 'COLORwords';
 let APPEARANCEwords = 'APPEARANCEwords';
 
+
+
 router.post('/valueinput', async (req, res) => {
     //-------------------------------------
     console.log(req.body);
@@ -26,7 +28,7 @@ router.post('/valueinput', async (req, res) => {
     let item = input['item']
     let value = `${input['value']}`
 
-    let query = await mongodb.find(`${plant}dbMAIN`,'MAIN',{"POID":poid});
+    let query = await mongodb.find(`${plant}dbMAIN`,'MAIN',{$and:[{"POID":poid},{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]});
     
 
     if(query.length>0){
@@ -83,7 +85,7 @@ router.post('/valueinput', async (req, res) => {
                         updv[item] = setupdate;
                         
                        
-                        let upd = await mongodb.update(`${plant}dbMAIN`,'MAIN',{"POID":poid}, { $set: updv });
+                        let upd = await mongodb.update(`${plant}dbMAIN`,'MAIN',{$and:[{"POID":poid},{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: updv });
                         output = {"return":'OK'} 
                         //------------------------------------
                     }else if(valueAC == val){
@@ -97,7 +99,7 @@ router.post('/valueinput', async (req, res) => {
                         let updv = {};
                         updv[item] = setupdate;
                        
-                        let upd = await mongodb.update(`${plant}dbMAIN`,'MAIN',{"POID":poid}, { $set: updv });
+                        let upd = await mongodb.update(`${plant}dbMAIN`,'MAIN',{$and:[{"POID":poid},{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: updv });
                         output = {"return":'OK'} 
                         //------------------------------------
                     }
@@ -124,7 +126,7 @@ router.post('/valueinput', async (req, res) => {
                         let updv = {};
                         updv[item] = setupdate;
                        
-                        let upd = await mongodb.update(`${plant}dbMAIN`,'MAIN',{"POID":poid}, { $set: updv });
+                        let upd = await mongodb.update(`${plant}dbMAIN`,'MAIN',{$and:[{"POID":poid},{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: updv });
                         output = {"return":'OK'} 
                         //------------------------------------
                     }else if(valueAC>=MIN && valueAC<=MAX){
@@ -139,7 +141,7 @@ router.post('/valueinput', async (req, res) => {
                         let updv = {};
                         updv[item] = setupdate;
                        
-                        let upd = await mongodb.update(`${plant}dbMAIN`,'MAIN',{"POID":poid}, { $set: updv });
+                        let upd = await mongodb.update(`${plant}dbMAIN`,'MAIN',{$and:[{"POID":poid},{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: updv });
                         output = {"return":'OK'} 
                         //------------------------------------
                     }
