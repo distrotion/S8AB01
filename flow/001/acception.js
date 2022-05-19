@@ -20,7 +20,7 @@ router.post('/passtomana', async (req, res) => {
     let plant = input['plant']
     let SENDTOMANAdate= day;
 
-    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: {"DEP":"MANA","SENDTOMANAdate":SENDTOMANAdate,"STAFF":ID} });
+    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', {$and:[{ "POID": poid },{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: {"DEP":"MANA","SENDTOMANAdate":SENDTOMANAdate,"STAFF":ID} });
 
     let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [ { "POID": poid } , { "DEP": "MANA" }] }); 
     if(find.length > 0){
@@ -43,7 +43,7 @@ router.post('/passtoscada', async (req, res) => {
     let plant = input['plant']
     let SENDTOSCADAdate= day;
 
-    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: {"DEP":"SCADA","SENDTOSCADAdate":SENDTOSCADAdate,"MGR":ID} });
+    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', {$and:[{ "POID": poid },{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: {"DEP":"SCADA","SENDTOSCADAdate":SENDTOSCADAdate,"MGR":ID} });
 
 
 
