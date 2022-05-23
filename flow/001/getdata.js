@@ -73,7 +73,7 @@ router.post('/getliststaff', async (req, res) => {
                 passcount++;
             } else if (output[i][output[i]['checklist'][j]]['AllSt'] === 'REJECT') {
                 output[i]['SumStatus'] = 'ALL-REJECT'
-                let upd = await mongodb.update(`${output[i]['PLANT']}dbMAIN`,'MAIN',{"POID":output[i]['POID']}, { $set: {"SumStatus":"ALL-REJECT"} });
+                let upd = await mongodb.update(`${output[i]['PLANT']}dbMAIN`,'MAIN',{$and:[{"POID":output[i]['POID']},{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: {"SumStatus":"ALL-REJECT"} });
             }
             //REJECT
 
@@ -83,7 +83,7 @@ router.post('/getliststaff', async (req, res) => {
 
         if (passcount === output[i]['checklist'].length) {
             output[i]['SumStatus'] = 'ALL-PASS'
-            let upd = await mongodb.update(`${output[i]['PLANT']}dbMAIN`,'MAIN',{"POID":output[i]['POID']}, { $set: {"SumStatus":"ALL-PASS"} });
+            let upd = await mongodb.update(`${output[i]['PLANT']}dbMAIN`,'MAIN',{$and:[{"POID":output[i]['POID']},{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: {"SumStatus":"ALL-PASS"} });
         }
 
     };

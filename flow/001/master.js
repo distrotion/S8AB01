@@ -274,7 +274,7 @@ router.post('/upselectappearance', async (req, res) => {
     let check = await mongodb.find(APPEARANCEwords,dbin,{"WID":input['WID'] });
 
     if(check.length === 0){
-        let check2 = await mongodb.find(APPEARANCEwords,dbin,{"value":input['value'] });
+        let check2 = await mongodb.find(APPEARANCEwords,dbin,{$and:[{"value":input['value']},{"plant":input['plant']}] });
 
         if(check2.length > 0){
 

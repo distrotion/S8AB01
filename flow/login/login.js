@@ -65,9 +65,12 @@ router.post('/newpass', async (req, res) => {
     let output = {"return":'NOK'}
     let findDB = await mongodb.find(Auth,user,{"ID":input['ID']});
 
-    if(findDB.length > 0){
+    // console.log(findDB);
 
-        if(findDB['PASS'] === input['PASS']){           
+    if(findDB.length > 0){
+        console.log("---?");
+
+        if(findDB[0]['PASS'] === input['PASS']){           
             let upd = await mongodb.update(Auth,user,{ "ID":input['ID'] }, { $set: {"PASS":input['NEWPASS'],"EDIT":day} });
             output = {"return":'OK'}
         }else{

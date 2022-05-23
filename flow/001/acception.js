@@ -31,6 +31,29 @@ router.post('/passtomana', async (req, res) => {
     res.json(output);
 });
 
+router.post('/returntostaff', async (req, res) => {
+    console.log("returntostaff");
+    //-------------------------------------
+    console.log(req.body);
+    let input = req.body;
+    //-------------------------------------
+    let output = { "return": 'NOK' }
+    let poid = `${input['poid']}`
+    let ID = `${input['ID']}`
+    let plant = input['plant']
+    let RETURNTOSTAFFdate= day;
+
+    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', {$and:[{ "POID": poid },{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: {"DEP":"STAFF","RETURNTOSTAFFdate":RETURNTOSTAFFdate,"STAFF":ID} });
+
+    let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [ { "POID": poid } , { "DEP": "MANA" }] }); 
+    if(find.length > 0){
+        output = { "return": 'OK' }
+    }
+
+
+    res.json(output);
+});
+
 router.post('/passtoscada', async (req, res) => {
 
     //-------------------------------------

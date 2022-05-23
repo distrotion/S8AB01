@@ -6,6 +6,7 @@ router.use(require("./flow/001/register"))
 router.use(require("./flow/001/getdata"))
 router.use(require("./flow/001/valueinput"))
 router.use(require("./flow/001/acception"))
+router.use(require("./flow/001/history"))
 //-----------------------------------------
 router.use(require("./flow/login/login"))
 // router.use(require("./flow/002/flow002")) 
