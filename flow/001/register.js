@@ -109,6 +109,8 @@ router.post('/RegisterPO', async (req, res) => {
             "MATDATA":LIQUID[0],
             "ProductName":LIQUID[0]['ProductName'],
         };
+    }else{
+        output = 'The MAT NO. Incorrect';       
     }
 
     let neworder={
@@ -122,7 +124,7 @@ router.post('/RegisterPO', async (req, res) => {
         "DEP":"STAFF"
     };
 
-    let output = 'The order Incorrect';
+     output = 'The MAT NO. Incorrect';
 
     if(data["PLANT"]!=="NOdata"){
         // console.log(Object.keys(data["MATDATA"]["SPEC"]))
