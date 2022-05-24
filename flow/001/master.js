@@ -43,6 +43,7 @@ router.post('/uppremixmaster', async (req, res) => {
         input['date'] = day;
         var ins = await mongodb.insertMany(PREMIXserver,dbin,[input]);
     }else{
+        input['dateEdit'] = day;
         let upd = await mongodb.update(PREMIXserver,dbin,{ "MATNO":input['MATNO'] }, { $set: input });
     }
     
@@ -69,6 +70,7 @@ router.post('/upcoilcoatingmaster', async (req, res) => {
         input['date'] = day;
         var ins = await mongodb.insertMany(COILCOATINGserver,dbin,[input]);
     }else{
+        input['dateEdit'] = day;
         let upd = await mongodb.update(COILCOATINGserver,dbin,{ "MATNO":input['MATNO'] }, { $set: input });
     }
 
@@ -97,6 +99,7 @@ router.post('/uphydrophilicmaster', async (req, res) => {
         input['date'] = day;
         var ins = await mongodb.insertMany(HYDROPHILICserver,dbin,[input]);
     }else{
+        input['dateEdit'] = day;
         let upd = await mongodb.update(HYDROPHILICserver,dbin,{ "MATNO":input['MATNO'] }, { $set: input });
     }
 
@@ -124,6 +127,7 @@ router.post('/upplxmaster', async (req, res) => {
         input['date'] = day;
         var ins = await mongodb.insertMany(PLXserver,dbin,[input]);
     }else{
+        input['dateEdit'] = day;
         let upd = await mongodb.update(PLXserver,dbin,{ "MATNO":input['MATNO'] }, { $set: input });
     }
 
@@ -151,6 +155,7 @@ router.post('/uptritratingmaster', async (req, res) => {
         input['date'] = day;
         var ins = await mongodb.insertMany(TRITRATINGserver,dbin,[input]);
     }else{
+        input['dateEdit'] = day;
         let upd = await mongodb.update(TRITRATINGserver,dbin,{ "MATNO":input['MATNO'] }, { $set: input });
     }
 
@@ -178,6 +183,7 @@ router.post('/uppowdermaster', async (req, res) => {
         input['date'] = day;
         var ins = await mongodb.insertMany(POWDERserver,dbin,[input]);
     }else{
+        input['dateEdit'] = day;
         let upd = await mongodb.update(POWDERserver,dbin,{ "MATNO":input['MATNO'] }, { $set: input });
     }
 
@@ -205,6 +211,7 @@ router.post('/upliquidmaster', async (req, res) => {
         input['date'] = day;
         var ins = await mongodb.insertMany(LIQUIDserver,dbin,[input]);
     }else{
+        input['dateEdit'] = day;
         let upd = await mongodb.update(LIQUIDserver,dbin,{ "MATNO":input['MATNO'] }, { $set: input });
     }
 

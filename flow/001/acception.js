@@ -4,7 +4,7 @@ const router = express.Router();
 let mongodb = require('../../function/mongodb');
 var request = require('request');
 
-const d = new Date();
+const d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
 let day = d;
 
 

@@ -21,7 +21,7 @@ let POWDERdbMAIN = 'POWDERdbMAIN';
 let LIQUIDdbMAIN = 'LIQUIDdbMAIN';
 let dbinMAIN = 'MAIN'
 
-const d = new Date();
+const d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
 let day = d;
 
 router.post('/RegisterPO', async (req, res) => {
