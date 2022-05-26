@@ -43,7 +43,7 @@ router.post('/gethistory', async (req, res) => {
     let outdata = [];
 
 
-    let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [{ "MATNO": MATCP }] });
+    let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [{ "MATNO": MATCP },$or[{ "SumStatus": 'ALL-PASS' },{ "SumStatus": 'REJECT' }]] });
     console.log(find);
     if (find.length > 0) {
         // output = find;
