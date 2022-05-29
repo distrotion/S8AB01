@@ -85,6 +85,7 @@ router.post('/valueinput', async (req, res) => {
                                 console.log("NO PASS");
                                 if (veTStc === 'T3Stc') {
                                     setupdate['AllSt'] = 'REJECT'
+                                    setupdate['DEP'] = 'REJECT'
                                 }
                                 //------------------------------------
                                 let updv = {};
@@ -120,6 +121,7 @@ router.post('/valueinput', async (req, res) => {
                                 console.log("NO PASS");
                                 if (veTStc === 'T3Stc') {
                                     setupdate['AllSt'] = 'REJECT'
+                                    setupdate['DEP'] = 'REJECT'
                                 }
                                 //------------------------------------
                                 let updv = {};
@@ -165,6 +167,7 @@ router.post('/valueinput', async (req, res) => {
 
                             if (veTStc === 'T3Stc') {
                                 setupdate['AllSt'] = 'REJECT'
+                                setupdate['DEP'] = 'REJECT'
                             }
                             //------------------------------------
                             let updv = {};
@@ -309,141 +312,147 @@ router.post('/valueinputadj', async (req, res) => {
                 veTSt = '';
                 veTStc = '';
             }
+            if (veT !== '') {
+                // console.log(query[0][item]);
+                let setupdate = query[0][item];
+                if (item == 'COLOR' || item == 'APPEARANCE') {
+                    //                   
+                    let valueAC = value.toUpperCase();
+                    let val = `${setupdate['SPEC']}`.toUpperCase();
+                    let valueACdata = value;
+                    let valdata = `${setupdate['SPEC']}`;
+     
+                    if (val.includes('-') || val.includes('to')) {
+    
+                        if (val.includes(valueAC) == false) {
+                            // if(valueAC != val){
+                            setupdate[veT] = `${valueACdata}`
+                            setupdate[veTSt] = 'M-ADJ'
+                            setupdate[veTStc] = 'red'
+                            console.log("NO PASS");
+                            if (veTStc === 'T3Stc') {
+                                setupdate['AllSt'] = 'REJECT'
+                                setupdate['DEP'] = 'REJECT'
+                            }
+                            //------------------------------------
+                            let updv = {};
+                            updv[item] = setupdate;
+    
+    
+                            let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
+                            output = { "return": 'OK' }
+                            //------------------------------------
+                            // }else if(valueAC == val){
+                        } else if (val.includes(valueAC)) {
+                            console.log("PASS");
+                            setupdate[veT] = `${valueACdata}`
+                            setupdate[veTSt] = 'M-ADJ'
+                            setupdate[veTStc] = 'lightgreen'
+                            setupdate['AllSt'] = 'PASS'
+                            console.log("PASS");
+                            //------------------------------------
+                            let updv = {};
+                            updv[item] = setupdate;
+    
+                            let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
+                            output = { "return": 'OK' }
+                            //------------------------------------
+                        }
+    
+                    } else {
+    
+                        if (valueAC != val) {
+                            setupdate[veT] = `${valueACdata}`
+                            setupdate[veTSt] = 'M-ADJ'
+                            setupdate[veTStc] = 'red'
+                            console.log("NO PASS");
+                            if (veTStc === 'T3Stc') {
+                                setupdate['AllSt'] = 'REJECT'
+                                setupdate['DEP'] = 'REJECT'
+                            }
+                            //------------------------------------
+                            let updv = {};
+                            updv[item] = setupdate;
+    
+    
+                            let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
+                            output = { "return": 'OK' }
+                            //------------------------------------
+                        } else if (valueAC == val) {
+                            console.log("PASS");
+                            setupdate[veT] = `${valueACdata}`
+                            setupdate[veTSt] = 'M-ADJ'
+                            setupdate[veTStc] = 'lightgreen'
+                            setupdate['AllSt'] = 'PASS'
+                            console.log("PASS");
+                            //------------------------------------
+                            let updv = {};
+                            updv[item] = setupdate;
+    
+                            let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
+                            output = { "return": 'OK' }
+                            //------------------------------------
+                        }
+    
+                    }
+    
+    
+    
+                } else {
+                    //
+                    let valueAC = parseFloat(value);
+                    let MIN = parseFloat(setupdate['SPEC']['LOW']);
+                    let MAX = parseFloat(setupdate['SPEC']['HI']);
+    
+                    console.log(`${MIN}<${valueAC}<${MAX}`);
+                    if (valueAC < MIN || valueAC > MAX) {
+    
+                        setupdate[veT] = valueAC.toFixed(4)
+                        setupdate[veTSt] = 'M-ADJ'
+                        setupdate[veTStc] = 'red'
+                        console.log("NO PASS");
+    
+                        if (veTStc === 'T3Stc') {
+                            setupdate['AllSt'] = 'REJECT'
+                            setupdate['DEP'] = 'REJECT'
+                        }
+                        //------------------------------------
+                        let updv = {};
+                        updv[item] = setupdate;
+    
+                        let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
+                        output = { "return": 'OK' }
+                        //------------------------------------
+                    } else if (valueAC >= MIN && valueAC <= MAX) {
+                        console.log("PASS");
+                        setupdate[veT] = valueAC.toFixed(4)
+                        setupdate[veTSt] = 'M-ADJ'
+                        setupdate[veTStc] = 'lightgreen'
+                        setupdate['AllSt'] = 'PASS'
+                        console.log("PASS");
+    
+                        //------------------------------------
+                        let updv = {};
+                        updv[item] = setupdate;
+    
+                        let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
+                        output = { "return": 'OK' }
+                        //------------------------------------
+                    }
+    
+    
+                }
+    
+            }
         } else {
             output = { "return": 'WOK' }
         }
 
-        if (veT !== '') {
-            // console.log(query[0][item]);
-            let setupdate = query[0][item];
-            if (item == 'COLOR' || item == 'APPEARANCE') {
-                //                   
-                let valueAC = value.toUpperCase();
-                let val = `${setupdate['SPEC']}`.toUpperCase();
-                let valueACdata = value;
-                let valdata = `${setupdate['SPEC']}`;
- 
-                if (val.includes('-') || val.includes('to')) {
-
-                    if (val.includes(valueAC) == false) {
-                        // if(valueAC != val){
-                        setupdate[veT] = `${valueACdata}`
-                        setupdate[veTSt] = 'M-ADJ'
-                        setupdate[veTStc] = 'red'
-                        console.log("NO PASS");
-                        if (veTStc === 'T3Stc') {
-                            setupdate['AllSt'] = 'REJECT'
-                        }
-                        //------------------------------------
-                        let updv = {};
-                        updv[item] = setupdate;
-
-
-                        let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
-                        output = { "return": 'OK' }
-                        //------------------------------------
-                        // }else if(valueAC == val){
-                    } else if (val.includes(valueAC)) {
-                        console.log("PASS");
-                        setupdate[veT] = `${valueACdata}`
-                        setupdate[veTSt] = 'M-ADJ'
-                        setupdate[veTStc] = 'lightgreen'
-                        setupdate['AllSt'] = 'PASS'
-                        console.log("PASS");
-                        //------------------------------------
-                        let updv = {};
-                        updv[item] = setupdate;
-
-                        let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
-                        output = { "return": 'OK' }
-                        //------------------------------------
-                    }
-
-                } else {
-
-                    if (valueAC != val) {
-                        setupdate[veT] = `${valueACdata}`
-                        setupdate[veTSt] = 'M-ADJ'
-                        setupdate[veTStc] = 'red'
-                        console.log("NO PASS");
-                        if (veTStc === 'T3Stc') {
-                            setupdate['AllSt'] = 'REJECT'
-                        }
-                        //------------------------------------
-                        let updv = {};
-                        updv[item] = setupdate;
-
-
-                        let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
-                        output = { "return": 'OK' }
-                        //------------------------------------
-                    } else if (valueAC == val) {
-                        console.log("PASS");
-                        setupdate[veT] = `${valueACdata}`
-                        setupdate[veTSt] = 'M-ADJ'
-                        setupdate[veTStc] = 'lightgreen'
-                        setupdate['AllSt'] = 'PASS'
-                        console.log("PASS");
-                        //------------------------------------
-                        let updv = {};
-                        updv[item] = setupdate;
-
-                        let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
-                        output = { "return": 'OK' }
-                        //------------------------------------
-                    }
-
-                }
-
-
-
-            } else {
-                //
-                let valueAC = parseFloat(value);
-                let MIN = parseFloat(setupdate['SPEC']['LOW']);
-                let MAX = parseFloat(setupdate['SPEC']['HI']);
-
-                console.log(`${MIN}<${valueAC}<${MAX}`);
-                if (valueAC < MIN || valueAC > MAX) {
-
-                    setupdate[veT] = valueAC.toFixed(4)
-                    setupdate[veTSt] = 'M-ADJ'
-                    setupdate[veTStc] = 'red'
-                    console.log("NO PASS");
-
-                    if (veTStc === 'T3Stc') {
-                        setupdate['AllSt'] = 'REJECT'
-                    }
-                    //------------------------------------
-                    let updv = {};
-                    updv[item] = setupdate;
-
-                    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
-                    output = { "return": 'OK' }
-                    //------------------------------------
-                } else if (valueAC >= MIN && valueAC <= MAX) {
-                    console.log("PASS");
-                    setupdate[veT] = valueAC.toFixed(4)
-                    setupdate[veTSt] = 'M-ADJ'
-                    setupdate[veTStc] = 'lightgreen'
-                    setupdate['AllSt'] = 'PASS'
-                    console.log("PASS");
-
-                    //------------------------------------
-                    let updv = {};
-                    updv[item] = setupdate;
-
-                    let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { $or: [{ "DEP": "MANA" }, { "DEP": "STAFF" }] }] }, { $set: updv });
-                    output = { "return": 'OK' }
-                    //------------------------------------
-                }
-
-
-            }
-
-        }
+        
 
     }
+
+    res.json(output);
 
 });
 

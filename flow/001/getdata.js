@@ -72,8 +72,9 @@ router.post('/getliststaff', async (req, res) => {
             if (output[i][output[i]['checklist'][j]]['AllSt'] === 'PASS') {
                 passcount++;
             } else if (output[i][output[i]['checklist'][j]]['AllSt'] === 'REJECT') {
-                output[i]['SumStatus'] = 'ALL-REJECT'
-                let upd = await mongodb.update(`${output[i]['PLANT']}dbMAIN`,'MAIN',{$and:[{"POID":output[i]['POID']},{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: {"SumStatus":"ALL-REJECT"} });
+                output[i]['SumStatus'] = 'REJECT'
+          
+                let upd = await mongodb.update(`${output[i]['PLANT']}dbMAIN`,'MAIN',{$and:[{"POID":output[i]['POID']},{$or:[{ "DEP": "MANA" },{ "DEP": "STAFF" }]}]}, { $set: {"SumStatus":"REJECT","DEP":"REJECT"} });
             }
             //REJECT
 
