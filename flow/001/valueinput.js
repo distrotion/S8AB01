@@ -154,13 +154,14 @@ router.post('/valueinput', async (req, res) => {
                     } else {
                         //
                         let valueAC = parseFloat(value);
+                        let valueORI = value;
                         let MIN = parseFloat(setupdate['SPEC']['LOW']);
                         let MAX = parseFloat(setupdate['SPEC']['HI']);
 
                         console.log(`${MIN}<${valueAC}<${MAX}`);
                         if (valueAC < MIN || valueAC > MAX) {
 
-                            setupdate[veT] = valueAC.toFixed(4);
+                            setupdate[veT] = valueORI;
                             setupdate[veTSt] = 'M';
                             setupdate[veTStc] = 'red';
                             console.log("NO PASS");
@@ -178,7 +179,7 @@ router.post('/valueinput', async (req, res) => {
                             //------------------------------------
                         } else if (valueAC >= MIN && valueAC <= MAX) {
                             console.log("PASS");
-                            setupdate[veT] = valueAC.toFixed(4);
+                            setupdate[veT] = valueORI;
                             setupdate[veTSt] = 'M';
                             setupdate[veTStc] = 'lightgreen';
                             setupdate['AllSt'] = 'PASS';
@@ -401,13 +402,14 @@ router.post('/valueinputadj', async (req, res) => {
                 } else {
                     //
                     let valueAC = parseFloat(value);
+                    let valueORI = value;
                     let MIN = parseFloat(setupdate['SPEC']['LOW']);
                     let MAX = parseFloat(setupdate['SPEC']['HI']);
     
                     console.log(`${MIN}<${valueAC}<${MAX}`);
                     if (valueAC < MIN || valueAC > MAX) {
     
-                        setupdate[veT] = valueAC.toFixed(4)
+                        setupdate[veT] = valueORI;
                         setupdate[veTSt] = 'M-ADJ'
                         setupdate[veTStc] = 'red'
                         console.log("NO PASS");
@@ -425,7 +427,7 @@ router.post('/valueinputadj', async (req, res) => {
                         //------------------------------------
                     } else if (valueAC >= MIN && valueAC <= MAX) {
                         console.log("PASS");
-                        setupdate[veT] = valueAC.toFixed(4)
+                        setupdate[veT] = valueORI;
                         setupdate[veTSt] = 'M-ADJ'
                         setupdate[veTStc] = 'lightgreen'
                         setupdate['AllSt'] = 'PASS'
