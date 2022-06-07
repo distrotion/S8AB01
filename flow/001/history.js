@@ -42,7 +42,7 @@ router.post('/gethistory', async (req, res) => {
     console.log(req.body);
     let input = req.body;
     //-------------------------------------
-    let outdata = [];
+    let outdata = {};
 
     try {
 
@@ -86,7 +86,7 @@ router.post('/gethistory', async (req, res) => {
         // console.log(output);
     }
     catch (err) {
-        output = [];
+        output = { "re": "NOK" };
     }
     res.json(output);
 });
