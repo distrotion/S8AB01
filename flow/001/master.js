@@ -25,10 +25,8 @@ router.get('/flow001', async (req, res) => {
 });
 
 router.post('/getpremixmaster', async (req, res) => {
-
+    let output = [];
     try {
-
-        let output = [];
 
         output = await mongodb.find(PREMIXserver, dbin, {});
     }
@@ -471,7 +469,7 @@ router.post('/selectdropdown', async (req, res) => {
         }
 
     }
-    
+
     catch (err) {
         output = {};
     }
