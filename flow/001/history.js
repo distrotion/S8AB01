@@ -42,11 +42,12 @@ router.post('/gethistory', async (req, res) => {
     console.log(req.body);
     let input = req.body;
     //-------------------------------------
-    let outdata = {};
+    
+    let output ={ "re": "NOK" }
 
     try {
 
-        let output = { "re": "NOK" };
+        let outdata = [];
         let MATCP = `${input['MATCP']}`
         let plant = input['plant']
 
