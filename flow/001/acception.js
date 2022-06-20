@@ -128,9 +128,7 @@ router.post('/passtoscadare', async (req, res) => {
         let plant = input['plant']
         let SENDTOSCADAdateRE = day;
 
-
         let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: { "DEP": "SCADA", "SENDTOSCADAdateRE": SENDTOSCADAdateRE, "RE-STAFF": ID } });
-
         let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { "DEP": "SCADA" }] });
 
         if (find.length > 0) {
@@ -169,7 +167,6 @@ router.post('/completetitem', async (req, res) => {
 
         let poid = `${input['poid']}`
         let plant = input['plant']
-
         let upd = await mongodb.update(`${plant}dbMAIN`, 'MAIN', { "POID": poid }, { $set: { "DEP": "COMPLETE" } });
 
     }
