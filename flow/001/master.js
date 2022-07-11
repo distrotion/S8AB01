@@ -9,6 +9,7 @@ let PLXserver = 'PLX_MASTER';
 let TRITRATINGserver = 'TRITRATING_MASTER';
 let POWDERserver = 'POWDER_MASTER';
 let LIQUIDserver = 'LIQUID_MASTER';
+let NOXRUSTserver = 'NOXRUST_MASTER'
 let dbin = 'specification';
 
 let COLORwords = 'COLORwords';
@@ -331,6 +332,51 @@ router.post('/upliquidmaster', async (req, res) => {
     res.json(output);
 });
 
+router.post('/getnoxrustmaster', async (req, res) => {
+    let output = [];
+
+    try {
+
+        output = await mongodb.find(NOXRUSTserver, dbin, {});
+
+    }
+    catch (err) {
+        output = [];
+    }
+
+    res.json(output);
+});
+
+router.post('/upnoxrustmaster', async (req, res) => {
+    //-------------------------------------
+    console.log(req.body);
+    let input = req.body;
+    //-------------------------------------
+    let output = [];
+
+    try {
+
+        let check = await mongodb.find(NOXRUSTserver, dbin, { "MATNO": input['MATNO'] });
+
+        if (check.length === 0) {
+            input['date'] = day;
+            var ins = await mongodb.insertMany(NOXRUSTserver, dbin, [input]);
+        } else {
+            input['dateEdit'] = day;
+            let upd = await mongodb.update(NOXRUSTserver, dbin, { "MATNO": input['MATNO'] }, { $set: input });
+        }
+
+        output = await mongodb.find(NOXRUSTserver, dbin, {});
+
+    }
+    catch (err) {
+        output = [];
+    }
+
+    res.json(output);
+});
+
+
 router.post('/selectcolor', async (req, res) => {
     //-------------------------------------
     console.log(req.body);
@@ -443,6 +489,8 @@ router.post('/upselectappearance', async (req, res) => {
     res.json(output);
 });
 
+//NOXRUST
+
 router.post('/selectdropdown', async (req, res) => {
     //-------------------------------------
     console.log(req.body);
@@ -466,6 +514,7 @@ router.post('/selectdropdown', async (req, res) => {
             "TRITRATING": output3[0]['TRITRATING'],
             "POWDER": output3[0]['POWDER'],
             "LIQUID": output3[0]['LIQUID'],
+            "NOXRUST": output3[0]['NOXRUST'],
         }
 
     }

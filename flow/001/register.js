@@ -10,6 +10,7 @@ let PLXserver = 'PLX_MASTER';
 let TRITRATINGserver = 'TRITRATING_MASTER';
 let POWDERserver = 'POWDER_MASTER';
 let LIQUIDserver = 'LIQUID_MASTER';
+let NOXRUSTserver = 'NOXRUST_MASTER'
 let dbin = 'specification';
 
 let PREMIXdbMAIN = 'PREMIXdbMAIN';
@@ -19,6 +20,7 @@ let PLXdbMAIN = 'PLXdbMAIN';
 let TRITRATINGdbMAIN = 'TRITRATINGdbMAIN';
 let POWDERdbMAIN = 'POWDERdbMAIN';
 let LIQUIDdbMAIN = 'LIQUIDdbMAIN';
+let NOXRUSTdbMAIN = 'NOXRUSTdbMAIN';
 let dbinMAIN = 'MAIN'
 
 const d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
@@ -43,6 +45,7 @@ router.post('/RegisterPO', async (req, res) => {
         let TRITRATING = await mongodb.find(TRITRATINGserver, dbin, { "MATNO": MATCP });
         let POWDER = await mongodb.find(POWDERserver, dbin, { "MATNO": MATCP });
         let LIQUID = await mongodb.find(LIQUIDserver, dbin, { "MATNO": MATCP });
+        let NOXRUST = await mongodb.find(NOXRUSTserver, dbin, { "MATNO": MATCP });
 
         let data = {
             "PLANT": "NOdata",
@@ -103,8 +106,7 @@ router.post('/RegisterPO', async (req, res) => {
                 "MATDATA": POWDER[0],
                 "ProductName": POWDER[0]['ProductName'],
             };
-        }
-        else if (LIQUID.length > 0) {
+        } else if (LIQUID.length > 0) {
             data = {
                 "MATCP": MATCP,
                 "PO": PO,
@@ -112,6 +114,15 @@ router.post('/RegisterPO', async (req, res) => {
                 "MASTERdb": LIQUIDserver,
                 "MATDATA": LIQUID[0],
                 "ProductName": LIQUID[0]['ProductName'],
+            };
+        } else if (NOXRUST.length > 0) {
+            data = {
+                "MATCP": MATCP,
+                "PO": PO,
+                "PLANT": "NOXRUST",
+                "MASTERdb": NOXRUSTserver,
+                "MATDATA": NOXRUST[0],
+                "ProductName": NOXRUST[0]['ProductName'],
             };
         } else {
             output = 'The MAT NO. Incorrect';
@@ -277,6 +288,10 @@ router.post('/rejectitem', async (req, res) => {
         let LIQUID = await mongodb.find(LIQUIDdbMAIN, dbinMAIN, { $and: [{ "POID": poid }, { "DEP": "STAFF" }] });
         if (LIQUID.length > 0) {
             plant = 'LIQUID';
+        }
+        let NOXRUST = await mongodb.find(NOXRUSTdbMAIN, dbinMAIN, { $and: [{ "POID": poid }, { "DEP": "STAFF" }] });
+        if (NOXRUST.length > 0) {
+            plant = 'NOXRUST';
         }
 
         console.log(plant);

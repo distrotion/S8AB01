@@ -10,6 +10,7 @@ let PLXdbMAIN = 'PLXdbMAIN';
 let TRITRATINGdbMAIN = 'TRITRATINGdbMAIN';
 let POWDERdbMAIN = 'POWDERdbMAIN';
 let LIQUIDdbMAIN = 'LIQUIDdbMAIN';
+let NOXRUSTdbMAIN = 'NOXRUSTdbMAIN'
 let dbin = 'specification';
 let dbinMAIN = 'MAIN'
 
@@ -64,6 +65,12 @@ router.post('/getliststaff', async (req, res) => {
         if (LIQUID.length > 0) {
             for (i = 0; i < LIQUID.length; i++) {
                 output.push(LIQUID[i]);
+            }
+        }
+        let NOXRUST = await mongodb.find(NOXRUSTdbMAIN, dbinMAIN, { $and: [{ "DEP": "STAFF" }] });
+        if (NOXRUST.length > 0) {
+            for (i = 0; i < NOXRUST.length; i++) {
+                output.push(NOXRUST[i]);
             }
         }
 
@@ -155,6 +162,12 @@ router.post('/getlistmana', async (req, res) => {
                 output.push(LIQUID[i]);
             }
         }
+        let NOXRUST = await mongodb.find(NOXRUSTdbMAIN, dbinMAIN, { $and: [{ "DEP": "MANA" }] });
+        if (NOXRUST.length > 0) {
+            for (i = 0; i < NOXRUST.length; i++) {
+                output.push(NOXRUST[i]);
+            }
+        }
 
     }
     catch (err) {
@@ -220,6 +233,12 @@ router.post('/getone', async (req, res) => {
         if (LIQUID.length > 0) {
             for (i = 0; i < LIQUID.length; i++) {
                 output.push(LIQUID[i]);
+            }
+        }
+        let NOXRUST = await mongodb.find(NOXRUSTdbMAIN, dbinMAIN, { $and: [{ "POID": poid }, { "DEP": "SCADA" }] });
+        if (NOXRUST.length > 0) {
+            for (i = 0; i < NOXRUST.length; i++) {
+                output.push(NOXRUST[i]);
             }
         }
 

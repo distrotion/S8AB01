@@ -10,6 +10,7 @@ let PLXserver = 'PLX_MASTER';
 let TRITRATINGserver = 'TRITRATING_MASTER';
 let POWDERserver = 'POWDER_MASTER';
 let LIQUIDserver = 'LIQUID_MASTER';
+let NOXRUSTserver = 'NOXRUST_MASTER'
 
 let dbin = 'specification';
 let COLORwords = 'COLORwords';
@@ -240,6 +241,7 @@ router.post('/semiauto-valueinputget', async (req, res) => {
         let TRITRATING = await mongodb.find(TRITRATINGserver, dbin, { "MATNO": MATCP });
         let POWDER = await mongodb.find(POWDERserver, dbin, { "MATNO": MATCP });
         let LIQUID = await mongodb.find(LIQUIDserver, dbin, { "MATNO": MATCP });
+        let NOXRUST = await mongodb.find(NOXRUSTserver, dbin, { "MATNO": MATCP });
 
         let plant = ``;
 
@@ -265,7 +267,10 @@ router.post('/semiauto-valueinputget', async (req, res) => {
         else if (LIQUID.length > 0) {
             plant = 'LIQUID'
 
-        } else {
+        } else if (NOXRUST.length > 0) {
+            plant = 'NOXRUST'
+
+        } else{
             res.json(output);
         }
 

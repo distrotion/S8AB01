@@ -87,10 +87,10 @@ router.post('/passtoscada', async (req, res) => {
 
         let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { "DEP": "SCADA" }] });
         if (find.length > 0) {
-            console.log(`http://127.0.0.1:2500/new_scada_${plant}`);
+            console.log(`http://172.23.10.34:2500/new_scada_${plant}`);
             output = { "return": 'OK' }
             request.post(
-                `http://127.0.0.1:2500/new_scada_${plant}`,
+                `http://172.23.10.34:2500/new_scada_${plant}`,
                 {
                     json: {
                         "poid": poid,
@@ -132,10 +132,10 @@ router.post('/passtoscadare', async (req, res) => {
         let find = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [{ "POID": poid }, { "DEP": "SCADA" }] });
 
         if (find.length > 0) {
-            console.log(`http://127.0.0.1:2500/new_scada_${plant}`);
+            console.log(`http://172.23.10.34:2500/new_scada_${plant}`);
             output = { "return": 'OK' }
             request.post(
-                `http://127.0.0.1:2500/new_scada_${plant}`,
+                `http://172.23.10.34:2500/new_scada_${plant}`,
                 {
                     json: {
                         "poid": poid,
