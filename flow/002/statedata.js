@@ -20,7 +20,7 @@ router.post('/getallgraph', async (req, res) => {
     let plant = input['plant'];
 
 
-    let historydata = await mongodb.find(`${plant}dbMAIN`, 'MAIN', { $and: [{ "MATNO": MATCP }] });
+    let historydata = await mongodb.findsort(`${plant}dbMAIN`, 'MAIN', { $and: [{ "MATNO": MATCP }] }, 1);
     if (historydata.length > 0) {
       output={
         "status":"ok",
