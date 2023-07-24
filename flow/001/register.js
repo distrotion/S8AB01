@@ -2,6 +2,7 @@ const e = require("express");
 const express = require("express");
 const router = express.Router();
 let mongodb = require('../../function/mongodb');
+let mssql = require('./../../function/mssql');
 
 let PREMIXserver = 'PREMIX_MASTER';
 let COILCOATINGserver = 'COILCOATING_MASTER';
@@ -31,7 +32,7 @@ router.post('/CHECKPO', async (req, res) => {
     console.log(req.body);
     let input = req.body;
     //-------------------------------------
-    let output = '';
+    let output = [];
 
     try {
 
@@ -143,30 +144,34 @@ router.post('/CHECKPO', async (req, res) => {
 
         if (data["PLANT"] !== "NOdata") {
             let query = '';
-            if(data["PLANT"] == 'TRITRATING'){
+            if (data["PLANT"] == 'TRITRATING') {
                 // query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '212575'`
-            }else  if(data["PLANT"] == 'COILCOATING'){
+            } else if (data["PLANT"] == 'COILCOATING') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[CoilProcessinfo] where NumOrder= '212575'`
-            }else  if(data["PLANT"] == 'HYDROPHILIC'){
+                query = `SELECT *  FROM [ScadaReport].[dbo].[CoilProcessinfo] where NumOrder= '${PO}'`
+            } else if (data["PLANT"] == 'HYDROPHILIC') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[HydroProcessinfo] where NumOrder= '212575'`
-            }else  if(data["PLANT"] == 'PLX'){
+                query = `SELECT *  FROM [ScadaReport].[dbo].[HydroProcessinfo] where NumOrder= '${PO}'`
+            } else if (data["PLANT"] == 'PLX') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[PLXprocessinfo] where NumOrder= '212575'`
-            }else  if(data["PLANT"] == 'PREMIX'){
+                query = `SELECT *  FROM [ScadaReport].[dbo].[PLXprocessinfo] where NumOrder= '${PO}'`
+            } else if (data["PLANT"] == 'PREMIX') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[PMProcessinfo] where NumOrder= '212575'`
-            }else  if(data["PLANT"] == 'POWDER'){
-                // query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '212575'`
-            }else  if(data["PLANT"] == 'LIQUID'){
+                query = `SELECT *  FROM [ScadaReport].[dbo].[PMIXproductinfo] where NumOrder= '${PO}'`
+            } else if (data["PLANT"] == 'POWDER') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '212575'`
-            }else  if(data["PLANT"] == 'NOXRUST'){
+                query = `SELECT *  FROM [ScadaReport].[dbo].[PMProcessinfo] where NumOrder= '${PO}'`
+            } else if (data["PLANT"] == 'LIQUID') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[NoxProcessinfo1] where NumOrder= '212575'`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '${PO}'`
+            } else if (data["PLANT"] == 'NOXRUST') {
+
+                query = `SELECT *  FROM [ScadaReport].[dbo].[NoxProcessinfo1] where NumOrder= '${PO}'`
             }
-    //[][][][][]
+            //[][][][][][]
+            let db = await mssql.qurey(query);
+
+            query = db;
 
         } else {
 
@@ -174,7 +179,7 @@ router.post('/CHECKPO', async (req, res) => {
 
     }
     catch (err) {
-        output = '';
+        output = [];
     }
 
 

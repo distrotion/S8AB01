@@ -3,7 +3,7 @@ const config = {
   user: "sa",
   password: "Parker789",
   database: "",
-  server: '',
+  server: '172.101.5.12',
   pool: {
     // max: 10,
     // min: 0,
