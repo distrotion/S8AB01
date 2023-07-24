@@ -126,7 +126,7 @@ router.post('/CHECKPO', async (req, res) => {
                 "ProductName": NOXRUST[0]['ProductName'],
             };
         } else {
-            output = 'The MAT NO. Incorrect';
+            output = [];
         }
 
         let neworder = {
@@ -140,7 +140,7 @@ router.post('/CHECKPO', async (req, res) => {
             "DEP": "STAFF"
         };
 
-        output = 'The MAT NO. Incorrect';
+        output = [];
 
         if (data["PLANT"] !== "NOdata") {
             let query = '';
