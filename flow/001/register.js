@@ -171,7 +171,7 @@ router.post('/CHECKPO', async (req, res) => {
             //[][][][][][]
             let db = await mssql.qurey(query);
 
-            query = db;
+            output = db;
 
         } else {
 
