@@ -148,25 +148,25 @@ router.post('/CHECKPO', async (req, res) => {
                 // query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '212575'`
             } else if (data["PLANT"] == 'COILCOATING') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[CoilProcessinfo] where NumOrder= '${PO}'`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[CoilProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
             } else if (data["PLANT"] == 'HYDROPHILIC') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[HydroProcessinfo] where NumOrder= '${PO}'`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[HydroProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
             } else if (data["PLANT"] == 'PLX') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[PLXprocessinfo] where NumOrder= '${PO}'`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[PLXprocessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
             } else if (data["PLANT"] == 'PREMIX') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[PMIXproductinfo] where NumOrder= '${PO}'`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[PMIXproductinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
             } else if (data["PLANT"] == 'POWDER') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[PMProcessinfo] where NumOrder= '${PO}'`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[PMProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
             } else if (data["PLANT"] == 'LIQUID') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '${PO}'`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
             } else if (data["PLANT"] == 'NOXRUST') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[NoxProcessinfo1] where NumOrder= '${PO}'`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[NoxProcessinfo1] where NumOrder= '${PO}' order by RecordTimeStart asc`
             }
             //[][][][][][]
             let db = await mssql.qurey(query);
