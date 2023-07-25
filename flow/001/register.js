@@ -161,7 +161,7 @@ router.post('/CHECKPO', async (req, res) => {
                                 "StrBarcode": "END",
                                 "NumModeOper": 0,
                                 "NumStep": 0,
-                                "NumSp": "comming",
+                                "NumSp": "coming",
                                 "NumAct": "soon",
                                 "NumTemp": 0,
                                 "dtDate": "2023-07-25T00:00:00.000Z"
@@ -178,29 +178,48 @@ router.post('/CHECKPO', async (req, res) => {
             } else if (data["PLANT"] == 'COILCOATING') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[CoilProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
+                let db = await mssql.qurey(query);
+
+                output = db;
             } else if (data["PLANT"] == 'HYDROPHILIC') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[HydroProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
+                let db = await mssql.qurey(query);
+
+                output = db;
             } else if (data["PLANT"] == 'PLX') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[PLXprocessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
+                let db = await mssql.qurey(query);
+
+                output = db;
             } else if (data["PLANT"] == 'PREMIX') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[PMIXproductinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
+                let db = await mssql.qurey(query);
+
+                output = db;
             } else if (data["PLANT"] == 'POWDER') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[PMProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
+                let db = await mssql.qurey(query);
+
+                output = db;
             } else if (data["PLANT"] == 'LIQUID') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
+                let db = await mssql.qurey(query);
+
+                output = db;
             } else if (data["PLANT"] == 'NOXRUST') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[NoxProcessinfo1] where NumOrder= '${PO}' order by RecordTimeStart asc`
+                let db = await mssql.qurey(query);
+
+                output = db;
             }
             //[][][][][][]
-            let db = await mssql.qurey(query);
-
-            output = db;
+          
 
         } else {
 
