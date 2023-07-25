@@ -147,6 +147,7 @@ router.post('/CHECKPO', async (req, res) => {
             if (data["PLANT"] == 'TRITRATING') {
                 // query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '212575'`
                 output= {
+
                     "recordsets": [
                         [
                             {
