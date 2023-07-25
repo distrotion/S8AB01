@@ -15,6 +15,8 @@ let dbin = 'specification';
 let dbinMAIN = 'MAIN'
 
 router.post('/getliststaff', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -110,6 +112,8 @@ router.post('/getliststaff', async (req, res) => {
 });
 
 router.post('/getlistmana', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -180,6 +184,8 @@ router.post('/getlistmana', async (req, res) => {
 
 
 router.post('/getone', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;

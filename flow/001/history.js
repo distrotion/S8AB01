@@ -6,7 +6,8 @@ var request = require('request');
 
 
 router.post('/gethistoryplant', async (req, res) => {
-
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+    let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -37,7 +38,8 @@ router.post('/gethistoryplant', async (req, res) => {
 
 
 router.post('/gethistory', async (req, res) => {
-
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+    let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;

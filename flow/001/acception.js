@@ -4,11 +4,12 @@ const router = express.Router();
 let mongodb = require('../../function/mongodb');
 var request = require('request');
 
-const d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
-let day = d;
+
 
 
 router.post('/passtomana', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
 
     //-------------------------------------
     console.log(req.body);
@@ -39,6 +40,8 @@ router.post('/passtomana', async (req, res) => {
 });
 
 router.post('/returntostaff', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     console.log("returntostaff");
     //-------------------------------------
     console.log(req.body);
@@ -69,7 +72,8 @@ router.post('/returntostaff', async (req, res) => {
 });
 
 router.post('/passtoscada', async (req, res) => {
-
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+    let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -114,7 +118,8 @@ router.post('/passtoscada', async (req, res) => {
 });
 
 router.post('/passtoscadare', async (req, res) => {
-
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+    let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -160,7 +165,8 @@ router.post('/passtoscadare', async (req, res) => {
 
 
 router.post('/completetitem', async (req, res) => {
-
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+    let day = d;
     let output = { "return": 'NOK' }
 
     try {

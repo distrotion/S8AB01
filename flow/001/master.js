@@ -16,8 +16,8 @@ let COLORwords = 'COLORwords';
 let APPEARANCEwords = 'APPEARANCEwords';
 
 
-const d = new Date();
-let day = d;
+// const d = new Date();
+// let day = d;
 
 
 router.get('/flow001', async (req, res) => {
@@ -26,6 +26,8 @@ router.get('/flow001', async (req, res) => {
 });
 
 router.post('/getpremixmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     let output = [];
     try {
 
@@ -39,7 +41,8 @@ router.post('/getpremixmaster', async (req, res) => {
 });
 
 router.post('/uppremixmaster', async (req, res) => {
-
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+    let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -67,7 +70,8 @@ router.post('/uppremixmaster', async (req, res) => {
 });
 
 router.post('/getcoilcoatingmaster', async (req, res) => {
-
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+    let day = d;
     let output = [];
 
     try {
@@ -83,6 +87,8 @@ router.post('/getcoilcoatingmaster', async (req, res) => {
 });
 
 router.post('/upcoilcoatingmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -113,6 +119,8 @@ router.post('/upcoilcoatingmaster', async (req, res) => {
 
 
 router.post('/gethydrophilicmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     let output = [];
 
     try {
@@ -128,6 +136,8 @@ router.post('/gethydrophilicmaster', async (req, res) => {
 });
 
 router.post('/uphydrophilicmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -157,6 +167,8 @@ router.post('/uphydrophilicmaster', async (req, res) => {
 });
 
 router.post('/getplxmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     let output = [];
 
     try {
@@ -172,6 +184,8 @@ router.post('/getplxmaster', async (req, res) => {
 });
 
 router.post('/upplxmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -201,6 +215,8 @@ router.post('/upplxmaster', async (req, res) => {
 });
 
 router.post('/gettritratingmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     let output = [];
 
     try {
@@ -216,6 +232,8 @@ router.post('/gettritratingmaster', async (req, res) => {
 });
 
 router.post('/uptritratingmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -245,6 +263,8 @@ router.post('/uptritratingmaster', async (req, res) => {
 });
 
 router.post('/getpowdermaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     let output = [];
 
     try {
@@ -260,6 +280,8 @@ router.post('/getpowdermaster', async (req, res) => {
 });
 
 router.post('/uppowdermaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -289,6 +311,8 @@ router.post('/uppowdermaster', async (req, res) => {
 });
 
 router.post('/getliquidmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     let output = [];
 
     try {
@@ -304,6 +328,8 @@ router.post('/getliquidmaster', async (req, res) => {
 });
 
 router.post('/upliquidmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -333,6 +359,8 @@ router.post('/upliquidmaster', async (req, res) => {
 });
 
 router.post('/getnoxrustmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     let output = [];
 
     try {
@@ -348,6 +376,8 @@ router.post('/getnoxrustmaster', async (req, res) => {
 });
 
 router.post('/upnoxrustmaster', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -378,6 +408,8 @@ router.post('/upnoxrustmaster', async (req, res) => {
 
 
 router.post('/selectcolor', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -397,6 +429,8 @@ router.post('/selectcolor', async (req, res) => {
 });
 
 router.post('/upselectcolor', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -434,6 +468,8 @@ router.post('/upselectcolor', async (req, res) => {
 });
 
 router.post('/selectappearance', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -454,6 +490,8 @@ router.post('/selectappearance', async (req, res) => {
 });
 
 router.post('/upselectappearance', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -492,6 +530,8 @@ router.post('/upselectappearance', async (req, res) => {
 //NOXRUST
 
 router.post('/selectdropdown', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;

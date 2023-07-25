@@ -20,6 +20,8 @@ let APPEARANCEwords = 'APPEARANCEwords';
 
 router.post('/valueinput', async (req, res) => {
     console.log("valueinput");
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -221,6 +223,8 @@ router.post('/valueinput', async (req, res) => {
 
 router.post('/semiauto-valueinputget', async (req, res) => {
     console.log("semiauto-valueinputget");
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
@@ -296,6 +300,8 @@ router.post('/semiauto-valueinputget', async (req, res) => {
 
 router.post('/valueinputadj', async (req, res) => {
     console.log("valueinputadj");
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
     //-------------------------------------
     console.log(req.body);
     let input = req.body;
