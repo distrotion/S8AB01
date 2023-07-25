@@ -146,6 +146,34 @@ router.post('/CHECKPO', async (req, res) => {
             let query = '';
             if (data["PLANT"] == 'TRITRATING') {
                 // query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '212575'`
+                output= {
+                    "recordsets": [
+                        [
+                            {
+                                "ID": "",
+                                "RecordTimeStart": "",
+                                "NumOrder": "212779",
+                                "NumTank": 0,
+                                "NumMode": 0,
+                                "StrChemical": "END",
+                                "StrLotNum": "RT11",
+                                "StrBarcode": "END",
+                                "NumModeOper": 0,
+                                "NumStep": 0,
+                                "NumSp": "comming",
+                                "NumAct": "soon",
+                                "NumTemp": 0,
+                                "dtDate": "2023-07-25T00:00:00.000Z"
+                            },
+                           
+                        ]
+                    ],
+                 
+                    "output": {},
+                    "rowsAffected": [
+                        1
+                    ]
+                }
             } else if (data["PLANT"] == 'COILCOATING') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[CoilProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
