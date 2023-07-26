@@ -293,7 +293,7 @@ let day = d;
                 }
             } else if (data["PLANT"] == 'PREMIX') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[PMIXProcessinfo] where NumOrder= '${PO}' order by RecordTime asc`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[PMIXProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
                 let db = await mssql.qurey(query);
 
             
