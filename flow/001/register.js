@@ -182,6 +182,8 @@ let day = d;
                 query = `SELECT *  FROM [ScadaReport].[dbo].[CoilProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
                 let db = await mssql.qurey(query);
 
+                
+
                 output = db;
             } else if (data["PLANT"] == 'HYDROPHILIC') {
 
@@ -207,6 +209,8 @@ let day = d;
                 let db = await mssql.qurey(query);
 
                 output = db;
+
+                console.log(db['recordsets'][0].length);
             } else if (data["PLANT"] == 'LIQUID') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
