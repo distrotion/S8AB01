@@ -262,6 +262,7 @@ let day = d;
         output = [];
     }
 
+    console.log(output)
 
     res.json(output);
 });
