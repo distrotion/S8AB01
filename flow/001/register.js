@@ -143,6 +143,7 @@ let day = d;
         };
 
         output = [];
+   
 
         if (data["PLANT"] !== "NOdata") {
             let query = '';
@@ -292,10 +293,14 @@ let day = d;
                 }
             } else if (data["PLANT"] == 'PREMIX') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[PMIXproductinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[PMIXproductinfo] where NumOrder= '${PO}' order by RecordTime asc`
                 let db = await mssql.qurey(query);
 
+            
+
                 output = db;
+
+                console.log(output);
                 if (db['recordsets'][0].length == 0) {
                     output = {
 
@@ -449,7 +454,7 @@ let day = d;
 
     }
     catch (err) {
-        output = [];
+        output = {};
     }
 
 
