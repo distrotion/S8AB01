@@ -185,24 +185,148 @@ let day = d;
                 
 
                 output = db;
+                if (db['recordsets'][0].length == 0) {
+                    output = {
+
+                        "recordsets": [
+                            [
+                                {
+                                    "ID": "",
+                                    "RecordTimeStart": "",
+                                    "NumOrder": "212779",
+                                    "NumTank": 0,
+                                    "NumMode": 0,
+                                    "StrChemical": "END",
+                                    "StrLotNum": "RT11",
+                                    "StrBarcode": "END",
+                                    "NumModeOper": 0,
+                                    "NumStep": 0,
+                                    "NumSp": "Lot",
+                                    "NumAct": "Repack",
+                                    "NumTemp": 0,
+                                    "dtDate": "2023-07-25T00:00:00.000Z"
+                                },
+
+                            ]
+                        ],
+
+                        "output": {},
+                        "rowsAffected": [
+                            1
+                        ]
+                    }
+                }
             } else if (data["PLANT"] == 'HYDROPHILIC') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[HydroProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
                 let db = await mssql.qurey(query);
 
                 output = db;
+                if (db['recordsets'][0].length == 0) {
+                    output = {
+
+                        "recordsets": [
+                            [
+                                {
+                                    "ID": "",
+                                    "RecordTimeStart": "",
+                                    "NumOrder": "212779",
+                                    "NumTank": 0,
+                                    "NumMode": 0,
+                                    "StrChemical": "END",
+                                    "StrLotNum": "RT11",
+                                    "StrBarcode": "END",
+                                    "NumModeOper": 0,
+                                    "NumStep": 0,
+                                    "NumSp": "Lot",
+                                    "NumAct": "Repack",
+                                    "NumTemp": 0,
+                                    "dtDate": "2023-07-25T00:00:00.000Z"
+                                },
+
+                            ]
+                        ],
+
+                        "output": {},
+                        "rowsAffected": [
+                            1
+                        ]
+                    }
+                }
             } else if (data["PLANT"] == 'PLX') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[PLXprocessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
                 let db = await mssql.qurey(query);
 
                 output = db;
+                if (db['recordsets'][0].length == 0) {
+                    output = {
+
+                        "recordsets": [
+                            [
+                                {
+                                    "ID": "",
+                                    "RecordTimeStart": "",
+                                    "NumOrder": "212779",
+                                    "NumTank": 0,
+                                    "NumMode": 0,
+                                    "StrChemical": "END",
+                                    "StrLotNum": "RT11",
+                                    "StrBarcode": "END",
+                                    "NumModeOper": 0,
+                                    "NumStep": 0,
+                                    "NumSp": "Lot",
+                                    "NumAct": "Repack",
+                                    "NumTemp": 0,
+                                    "dtDate": "2023-07-25T00:00:00.000Z"
+                                },
+
+                            ]
+                        ],
+
+                        "output": {},
+                        "rowsAffected": [
+                            1
+                        ]
+                    }
+                }
             } else if (data["PLANT"] == 'PREMIX') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[PMIXproductinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
                 let db = await mssql.qurey(query);
 
                 output = db;
+                if (db['recordsets'][0].length == 0) {
+                    output = {
+
+                        "recordsets": [
+                            [
+                                {
+                                    "ID": "",
+                                    "RecordTimeStart": "",
+                                    "NumOrder": "212779",
+                                    "NumTank": 0,
+                                    "NumMode": 0,
+                                    "StrChemical": "END",
+                                    "StrLotNum": "RT11",
+                                    "StrBarcode": "END",
+                                    "NumModeOper": 0,
+                                    "NumStep": 0,
+                                    "NumSp": "Lot",
+                                    "NumAct": "Repack",
+                                    "NumTemp": 0,
+                                    "dtDate": "2023-07-25T00:00:00.000Z"
+                                },
+
+                            ]
+                        ],
+
+                        "output": {},
+                        "rowsAffected": [
+                            1
+                        ]
+                    }
+                }
             } else if (data["PLANT"] == 'POWDER') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[PMProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
@@ -210,48 +334,110 @@ let day = d;
 
                 output = db;
 
-                console.log(db['recordsets'][0].length);
+                if (db['recordsets'][0].length == 0) {
+                    output = {
+
+                        "recordsets": [
+                            [
+                                {
+                                    "ID": "",
+                                    "RecordTimeStart": "",
+                                    "NumOrder": "212779",
+                                    "NumTank": 0,
+                                    "NumMode": 0,
+                                    "StrChemical": "END",
+                                    "StrLotNum": "RT11",
+                                    "StrBarcode": "END",
+                                    "NumModeOper": 0,
+                                    "NumStep": 0,
+                                    "NumSp": "Lot",
+                                    "NumAct": "Repack",
+                                    "NumTemp": 0,
+                                    "dtDate": "2023-07-25T00:00:00.000Z"
+                                },
+
+                            ]
+                        ],
+
+                        "output": {},
+                        "rowsAffected": [
+                            1
+                        ]
+                    }
+                }
             } else if (data["PLANT"] == 'LIQUID') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[LQprocessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
                 let db = await mssql.qurey(query);
 
                 output = db;
+                if (db['recordsets'][0].length == 0) {
+                    output = {
+
+                        "recordsets": [
+                            [
+                                {
+                                    "ID": "",
+                                    "RecordTimeStart": "",
+                                    "NumOrder": "212779",
+                                    "NumTank": 0,
+                                    "NumMode": 0,
+                                    "StrChemical": "END",
+                                    "StrLotNum": "RT11",
+                                    "StrBarcode": "END",
+                                    "NumModeOper": 0,
+                                    "NumStep": 0,
+                                    "NumSp": "Lot",
+                                    "NumAct": "Repack",
+                                    "NumTemp": 0,
+                                    "dtDate": "2023-07-25T00:00:00.000Z"
+                                },
+
+                            ]
+                        ],
+
+                        "output": {},
+                        "rowsAffected": [
+                            1
+                        ]
+                    }
+                }
             } else if (data["PLANT"] == 'NOXRUST') {
 
                 query = `SELECT *  FROM [ScadaReport].[dbo].[NoxProcessinfo1] where NumOrder= '${PO}' order by RecordTimeStart asc`
                 let db = await mssql.qurey(query);
 
                 output = db;
-            }else{
-                output= {
+                if (db['recordsets'][0].length == 0) {
+                    output = {
 
-                    "recordsets": [
-                        [
-                            {
-                                "ID": "",
-                                "RecordTimeStart": "",
-                                "NumOrder": "212779",
-                                "NumTank": 0,
-                                "NumMode": 0,
-                                "StrChemical": "END",
-                                "StrLotNum": "RT11",
-                                "StrBarcode": "END",
-                                "NumModeOper": 0,
-                                "NumStep": 0,
-                                "NumSp": "coming",
-                                "NumAct": "soon",
-                                "NumTemp": 0,
-                                "dtDate": "2023-07-25T00:00:00.000Z"
-                            },
-                           
+                        "recordsets": [
+                            [
+                                {
+                                    "ID": "",
+                                    "RecordTimeStart": "",
+                                    "NumOrder": "212779",
+                                    "NumTank": 0,
+                                    "NumMode": 0,
+                                    "StrChemical": "END",
+                                    "StrLotNum": "RT11",
+                                    "StrBarcode": "END",
+                                    "NumModeOper": 0,
+                                    "NumStep": 0,
+                                    "NumSp": "Lot",
+                                    "NumAct": "Repack",
+                                    "NumTemp": 0,
+                                    "dtDate": "2023-07-25T00:00:00.000Z"
+                                },
+
+                            ]
+                        ],
+
+                        "output": {},
+                        "rowsAffected": [
+                            1
                         ]
-                    ],
-                 
-                    "output": {},
-                    "rowsAffected": [
-                        1
-                    ]
+                    }
                 }
             }
             //[][][][][][]
@@ -266,7 +452,7 @@ let day = d;
         output = [];
     }
 
-    console.log(output)
+
 
     res.json(output);
 });
