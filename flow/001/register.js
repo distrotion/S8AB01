@@ -538,7 +538,7 @@ let day = d;
                 }
             } else if (data["PLANT"] == 'NOXRUST') {
 
-                query = `SELECT *  FROM [ScadaReport].[dbo].[NoxProcessinfo1] where NumOrder= '${PO}' order by RecordTimeStart asc`
+                query = `SELECT *  FROM [ScadaReport].[dbo].[NoxProcessinfo] where NumOrder= '${PO}' order by RecordTimeStart asc`
                 let db = await mssql.qurey(query);
 
                 output = db;
