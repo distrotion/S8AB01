@@ -218,6 +218,27 @@ let day = d;
                             1
                         ]
                     }
+                }else{
+
+                    output['recordsets'][0].push(
+                        {
+                            "ID": "",
+                            "RecordTimeStart": "",
+                            "NumOrder": "",
+                            "NumTank": 0,
+                            "NumMode": 0,
+                            "StrChemical": "END",
+                            "StrLotNum": "",
+                            "StrBarcode": "END",
+                            "NumModeOper": 0,
+                            "NumStep": 0,
+                            "NumSp": "ADD",
+                            "NumAct": "END",
+                            "NumTemp": 0,
+                            "dtDate": "2023-07-25T00:00:00.000Z"
+                        },
+                    )
+
                 }
             } else if (data["PLANT"] == 'HYDROPHILIC') {
 
@@ -255,6 +276,27 @@ let day = d;
                             1
                         ]
                     }
+                }else{
+
+                    output['recordsets'][0].push(
+                        {
+                            "ID": "",
+                            "RecordTimeStart": "",
+                            "NumOrder": "",
+                            "NumTank": 0,
+                            "NumMode": 0,
+                            "StrChemical": "END",
+                            "StrLotNum": "",
+                            "StrBarcode": "END",
+                            "NumModeOper": 0,
+                            "NumStep": 0,
+                            "NumSp": "ADD",
+                            "NumAct": "END",
+                            "NumTemp": 0,
+                            "dtDate": "2023-07-25T00:00:00.000Z"
+                        },
+                    )
+
                 }
             } else if (data["PLANT"] == 'PLX') {
 
@@ -292,6 +334,27 @@ let day = d;
                             1
                         ]
                     }
+                }else{
+
+                    output['recordsets'][0].push(
+                        {
+                            "ID": "",
+                            "RecordTimeStart": "",
+                            "NumOrder": "",
+                            "NumTank": 0,
+                            "NumMode": 0,
+                            "StrChemical": "END",
+                            "StrLotNum": "",
+                            "StrBarcode": "END",
+                            "NumModeOper": 0,
+                            "NumStep": 0,
+                            "NumSp": "ADD",
+                            "NumAct": "END",
+                            "NumTemp": 0,
+                            "dtDate": "2023-07-25T00:00:00.000Z"
+                        },
+                    )
+
                 }
             } else if (data["PLANT"] == 'PREMIX') {
 
@@ -393,6 +456,27 @@ let day = d;
                             1
                         ]
                     }
+                }else{
+
+                    output['recordsets'][0].push(
+                        {
+                            "ID": "",
+                            "RecordTimeStart": "",
+                            "NumOrder": "",
+                            "NumTank": 0,
+                            "NumMode": 0,
+                            "StrChemical": "END",
+                            "StrLotNum": "",
+                            "StrBarcode": "END",
+                            "NumModeOper": 0,
+                            "NumStep": 0,
+                            "NumSp": "ADD",
+                            "NumAct": "END",
+                            "NumTemp": 0,
+                            "dtDate": "2023-07-25T00:00:00.000Z"
+                        },
+                    )
+
                 }
             } else if (data["PLANT"] == 'LIQUID') {
 
@@ -430,6 +514,27 @@ let day = d;
                             1
                         ]
                     }
+                }else{
+
+                    output['recordsets'][0].push(
+                        {
+                            "ID": "",
+                            "RecordTimeStart": "",
+                            "NumOrder": "",
+                            "NumTank": 0,
+                            "NumMode": 0,
+                            "StrChemical": "END",
+                            "StrLotNum": "",
+                            "StrBarcode": "END",
+                            "NumModeOper": 0,
+                            "NumStep": 0,
+                            "NumSp": "ADD",
+                            "NumAct": "END",
+                            "NumTemp": 0,
+                            "dtDate": "2023-07-25T00:00:00.000Z"
+                        },
+                    )
+
                 }
             } else if (data["PLANT"] == 'NOXRUST') {
 
@@ -467,6 +572,27 @@ let day = d;
                             1
                         ]
                     }
+                }else{
+
+                    output['recordsets'][0].push(
+                        {
+                            "ID": "",
+                            "RecordTimeStart": "",
+                            "NumOrder": "",
+                            "NumTank": 0,
+                            "NumMode": 0,
+                            "StrChemical": "END",
+                            "StrLotNum": "",
+                            "StrBarcode": "END",
+                            "NumModeOper": 0,
+                            "NumStep": 0,
+                            "NumSp": "ADD",
+                            "NumAct": "END",
+                            "NumTemp": 0,
+                            "dtDate": "2023-07-25T00:00:00.000Z"
+                        },
+                    )
+
                 }
             }
             //[][][][][][]
