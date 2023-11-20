@@ -65,8 +65,8 @@ router.post('/gethistory', async (req, res) => {
     console.log(req.body);
     let input = req.body;
     //-------------------------------------
-    
-    let output ={ "re": "NOK" }
+
+    let output = { "re": "NOK" }
 
     try {
 
@@ -124,7 +124,7 @@ router.post('/getweightlist', async (req, res) => {
     let input = req.body;
     //-------------------------------------
     let output = [];
-    if(input['MATNO']!=undefined ){
+    if (input['MATNO'] != undefined) {
         // let MATCP = input['PO'].substring(0, 8);
         let MATCP = input['MATNO']
         // let PO = input['PO'].substring(12, 18);
@@ -144,24 +144,24 @@ router.post('/getweightlist', async (req, res) => {
         };
 
         if (TRITRATING.length > 0) {
-       
+
         } else if (COILCOATING.length > 0) {
-       
+
         } else if (HYDROPHILIC.length > 0) {
-    
+
         } else if (PLX.length > 0) {
-          
+
         } else if (PREMIX.length > 0) {
-        
+
         } else if (POWDER.length > 0) {
-          
+
         } else if (LIQUID.length > 0) {
-            let LIQUIDpo = await mongodb.findnolim(LIQUIDdbMAIN, dbinMAIN, { "MATNO": MATCP },{ "PO": 1 });
-         
+            let LIQUIDpo = await mongodb.findnolim(LIQUIDdbMAIN, dbinMAIN, { "MATNO": MATCP }, { "PO": 1 });
+
             let polist = [];
             for (let i = 0; i < LIQUIDpo.length; i++) {
                 polist.push(`'${LIQUIDpo[i]['PO']}'`)
-                
+
             }
 
             let queryS = `SELECT * FROM [ScadaReport].[dbo].[LQprocessinfo] WHERE NumOrder in (${polist})  order by NumOrder  desc, RecordTimeStart  desc`
@@ -171,25 +171,27 @@ router.post('/getweightlist', async (req, res) => {
             let StrChemicalList = [];
             for (let i = 0; i < datadb.length; i++) {
                 let start = 0;
-                if(datadb[i]['StrChemical'] === 'END'){
+                if (datadb[i]['StrChemical'] === 'END') {
                     start++;
                 }
-                
-                if(start===1 && datadb[i]['StrChemical'] !== 'END'){
-                    StrChemicalList.push(datadb[i]['StrChemical'])
+
+                if (start === 1 && datadb[i]['StrChemical'] !== 'END') {
+                    StrChemicalList.push(datadb[i]['StrChemical']);
+                } if (start > 1) {
+                    break;
                 }
-                
+
             }
 
-            output = StrChemicalList;
-        
+            output = datadb;
+
         } else if (NOXRUST.length > 0) {
-          
+
         } else {
             output = [];
         }
 
-      
+
 
     }
 
