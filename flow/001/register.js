@@ -1110,11 +1110,11 @@ let day = d;
                     output = `The order have added to PLANT:${data["PLANT"]}`;
                     // input['COMMENT']
                     query = `INSERT  INTO [SOI8LOG].[dbo].[qcbypass_weight] ([POID],[COMMENT],[STATUS]) VALUES ('${input['PO']}','${input['COMMENT']}','NEW')`
-                    let db = await mssqlR.qurey(query);
+                    let db = await mssqlR.qureyR(query);
 
                 } else {
                     query = `INSERT  INTO [SOI8LOG].[dbo].[qcbypass_weight] ([POID],[COMMENT],[STATUS]) VALUES ('${input['PO']}','${input['COMMENT']}','HAVE')`
-                    let db = await mssqlR.qurey(query);
+                    let db = await mssqlR.qureyR(query);
                     output = `The order have already had in DB`;
                 }
 
