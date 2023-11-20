@@ -170,11 +170,12 @@ router.post('/getweightlist', async (req, res) => {
             let datadb = db['recordsets'][0];
             let StrChemicalList = [];
             for (let i = 0; i < datadb.length; i++) {
+                console.log(datadb[i]['StrChemical']);
                 let start = 0;
                 if (datadb[i]['StrChemical'] === 'END') {
                     start++;
                 }
-
+            
                 if (start === 1 && datadb[i]['StrChemical'] !== 'END') {
                     StrChemicalList.push(datadb[i]['StrChemical']);
                 } if (start > 1) {
