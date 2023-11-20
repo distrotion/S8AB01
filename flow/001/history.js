@@ -185,26 +185,26 @@ router.post('/getweightlist', async (req, res) => {
                 }
 
             }
-
+            let newset = {};
             for (let k = 0; k < polist.length; k++) {
                 for (let s = 0; s < StrChemicalList.length; s++) {
-                    let newset = {
+                    newset = {
                         
                     };
                     for (let i = 0; i < datadb.length; i++) {
 
-                        // if (polist[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s]===datadb[i]['StrChemical']) {
-                        //     newset['RecordTimeStart'] = datadb[i]['RecordTimeStart'];
-                        //     newset['PO'] = polist[k];
-                        //     newset[StrChemicalList[s]+'_StrLotNum'] = datadb[i]['StrLotNum'];
-                        //     newset[StrChemicalList[s]+'_StrBarcode'] = datadb[i]['StrBarcode'];
-                        //     newset[StrChemicalList[s]+'_NumStep'] = datadb[i]['NumStep'];
-                        //     newset[StrChemicalList[s]+'_NumSp'] = datadb[i]['NumSp'];
-                        //     newset[StrChemicalList[s]+'_NumAct'] = datadb[i]['NumAct'];
-                        //     newset[StrChemicalList[s]+'_NumTemp'] = datadb[i]['NumTemp'];
+                        if (polist[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s]===datadb[i]['StrChemical']) {
+                            newset['RecordTimeStart'] = datadb[i]['RecordTimeStart'];
+                            newset['PO'] = polist[k];
+                            newset[StrChemicalList[s]+'_StrLotNum'] = datadb[i]['StrLotNum'];
+                            newset[StrChemicalList[s]+'_StrBarcode'] = datadb[i]['StrBarcode'];
+                            newset[StrChemicalList[s]+'_NumStep'] = datadb[i]['NumStep'];
+                            newset[StrChemicalList[s]+'_NumSp'] = datadb[i]['NumSp'];
+                            newset[StrChemicalList[s]+'_NumAct'] = datadb[i]['NumAct'];
+                            newset[StrChemicalList[s]+'_NumTemp'] = datadb[i]['NumTemp'];
                            
                        
-                        // }
+                        }
                     }
                 }
                 DATAOUTPUT.push(newset);
