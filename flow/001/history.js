@@ -161,6 +161,7 @@ router.post('/getweightlist', async (req, res) => {
             let polist = [];
             for (let i = 0; i < GETPO.length; i++) {
                 polist.push(`'${GETPO[i]['PO']}'`)
+              
 
             }
 
@@ -212,7 +213,10 @@ router.post('/getweightlist', async (req, res) => {
                 DATAOUTPUT.push(newset);
             }
 
-            output = DATAOUTPUT;
+            output = {
+                "list":StrChemicalList,
+                "DATA":DATAOUTPUT
+            };
 
         } else if (NOXRUST.length > 0) {
 
