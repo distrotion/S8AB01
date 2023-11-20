@@ -176,7 +176,7 @@ router.post('/getweightlist', async (req, res) => {
                     start++;
                 }
             
-                if (start === 1 && datadb[i]['StrChemical'] !== 'END') {
+                if (start === 1 ) {
                     StrChemicalList.push(datadb[i]['StrChemical']);
                 } if (start > 1) {
                     break;
@@ -184,7 +184,7 @@ router.post('/getweightlist', async (req, res) => {
 
             }
 
-            output = datadb;
+            output = StrChemicalList;
 
         } else if (NOXRUST.length > 0) {
 
