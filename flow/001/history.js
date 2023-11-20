@@ -179,23 +179,24 @@ router.post('/getweightlist', async (req, res) => {
                 }
 
                 if (start === 1 && datadb[i]['StrChemical'] !== 'END') {
-                    StrChemicalList.push(datadb[i]['StrChemical']);
+                    StrChemicalList.push(datadb[i]['StrChemical'].replace(" ", ""));
                 } if (start > 1) {
                     break;
                 }
 
             }
-            let newset = {};
+       
             for (let k = 0; k < polist.length; k++) {
-                for (let s = 0; s < StrChemicalList.length; s++) {
-                    newset = {
+                let newset = {
                         
-                    };
+                };
+                for (let s = 0; s < StrChemicalList.length; s++) {
+                    
                     for (let i = 0; i < datadb.length; i++) {
 
-                        if (polist[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s]===datadb[i]['StrChemical']) {
+                        if (polist[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s]===datadb[i]['StrChemical'].replace(" ", "")) {
                             newset['RecordTimeStart'] = datadb[i]['RecordTimeStart'];
-                            newset['PO'] = polist[k];
+                            newset['PO'] = datadb[i]['NumOrder'];
                             newset[StrChemicalList[s]+'_StrLotNum'] = datadb[i]['StrLotNum'];
                             newset[StrChemicalList[s]+'_StrBarcode'] = datadb[i]['StrBarcode'];
                             newset[StrChemicalList[s]+'_NumStep'] = datadb[i]['NumStep'];
@@ -203,6 +204,7 @@ router.post('/getweightlist', async (req, res) => {
                             newset[StrChemicalList[s]+'_NumAct'] = datadb[i]['NumAct'];
                             newset[StrChemicalList[s]+'_NumTemp'] = datadb[i]['NumTemp'];
                            
+                            break;
                        
                         }
                     }
