@@ -1097,7 +1097,7 @@ let day = d;
                 neworder['checklist'] = checklist;
                 var ins = await mongodb.insertMany(`${neworder['PLANT']}dbMAIN`, 'MAIN', [neworder]);
                 output = `The order have added to PLANT:${data["PLANT"]}`;
-                query = `INSERT  INTO [SOI8LOG].[dbo].[qcbypass_weight] ([POID],[COMMENT],[STATUS],[USERID]) VALUES ('${input['PO']}','${input['COMMENT']}','NEW','${input['ID']})`
+                query = `INSERT  INTO [SOI8LOG].[dbo].[qcbypass_weight] ([POID],[COMMENT],[STATUS],[USERID]) VALUES ('${input['PO']}','${input['COMMENT']}','NEW','${input['ID']}')`
                 let db = await mssqlR.qureyR(query);
             } else {
                 // let upd = await mongodb.update(`${neworder['PLANT']}dbMAIN`,'MAIN',{ "POID":neworder['POID'] }, { $set: neworder });
@@ -1111,11 +1111,11 @@ let day = d;
                     console.log(">>>>>>>")
                     output = `The order have added to PLANT:${data["PLANT"]}`;
                     // input['COMMENT']
-                    query = `INSERT  INTO [SOI8LOG].[dbo].[qcbypass_weight] ([POID],[COMMENT],[STATUS],[USERID]) VALUES ('${input['PO']}','${input['COMMENT']}','NEW','${input['ID']})`
+                    query = `INSERT  INTO [SOI8LOG].[dbo].[qcbypass_weight] ([POID],[COMMENT],[STATUS],[USERID]) VALUES ('${input['PO']}','${input['COMMENT']}','NEW','${input['ID']}')`
                     let db = await mssqlR.qureyR(query);
 
                 } else {
-                    query = `INSERT  INTO [SOI8LOG].[dbo].[qcbypass_weight] ([POID],[COMMENT],[STATUS],[USERID]) VALUES ('${input['PO']}','${input['COMMENT']}','HAVE','${input['ID']})`
+                    query = `INSERT  INTO [SOI8LOG].[dbo].[qcbypass_weight] ([POID],[COMMENT],[STATUS],[USERID]) VALUES ('${input['PO']}','${input['COMMENT']}','HAVE','${input['ID']}')`
                     let db = await mssqlR.qureyR(query);
                     output = `The order have already had in DB`;
                 }
