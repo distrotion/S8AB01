@@ -198,6 +198,7 @@ router.post('/getweightlist', async (req, res) => {
                         if (polist[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s]===datadb[i]['StrChemical'].replace(" ", "").replace("    ", "").replace("\n", "")) {
                             newset['RecordTimeStart'] = datadb[i]['RecordTimeStart'];
                             newset['PO'] = datadb[i]['NumOrder'];
+                            newset['MATNO'] = input['MATNO'];
                             newset[StrChemicalList[s]+'_StrLotNum'] = datadb[i]['StrLotNum'];
                             newset[StrChemicalList[s]+'_StrBarcode'] = datadb[i]['StrBarcode'];
                             newset[StrChemicalList[s]+'_NumStep'] = datadb[i]['NumStep'];
