@@ -185,7 +185,7 @@ router.post('/getweightlist', async (req, res) => {
 
             }
 
-            output = StrChemicalList;
+            output = datadb;
 
         } else if (NOXRUST.length > 0) {
 
