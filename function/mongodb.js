@@ -37,6 +37,21 @@ exports.find = async (db_input, collection_input, input) => {
   return res;
 };
 
+exports.findnolim = async (db_input, collection_input, input,input2) => {
+
+  const client = new MongoClient(url);
+  await client.connect();
+
+  const db = client.db(db_input);
+  const collection = db.collection(collection_input);
+  let res = await collection.find(input).project(input2).sort({ "_id": -1 }).toArray();
+
+  await client.close();
+
+
+  return res;
+};
+
 exports.findsort = async (db_input, collection_input, input,sort) => {
 
   const client = new MongoClient(url);
