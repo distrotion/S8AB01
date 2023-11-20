@@ -1097,6 +1097,8 @@ let day = d;
                 neworder['checklist'] = checklist;
                 var ins = await mongodb.insertMany(`${neworder['PLANT']}dbMAIN`, 'MAIN', [neworder]);
                 output = `The order have added to PLANT:${data["PLANT"]}`;
+                query = `INSERT  INTO [SOI8LOG].[dbo].[qcbypass_weight] ([POID],[COMMENT],[STATUS]) VALUES ('${input['PO']}','${input['COMMENT']}','NEW')`
+                let db = await mssqlR.qureyR(query);
             } else {
                 // let upd = await mongodb.update(`${neworder['PLANT']}dbMAIN`,'MAIN',{ "POID":neworder['POID'] }, { $set: neworder });
 
