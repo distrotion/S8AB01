@@ -172,7 +172,7 @@ router.post('/getweightlist', async (req, res) => {
             let DATAOUTPUT = [];
             let start = 0;
             for (let i = 0; i < datadb.length; i++) {
-                console.log(datadb[i]['StrChemical']);
+                // console.log(datadb[i]['StrChemical']);
 
                 if (datadb[i]['StrChemical'] === 'END') {
                     start++;
@@ -196,12 +196,12 @@ router.post('/getweightlist', async (req, res) => {
                         if (GETPO[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s]===datadb[i]['StrChemical']) {
                             newset['RecordTimeStart'] = datadb[i]['RecordTimeStart'];
                             newset['PO'] = GETPO[k];
-                            newset[StrChemicalList[s]+'_StrLotNum'] = datadb[i]['StrLotNum'];
-                            newset[StrChemicalList[s]+'_StrBarcode'] = datadb[i]['StrBarcode'];
-                            newset[StrChemicalList[s]+'_NumStep'] = datadb[i]['NumStep'];
-                            newset[StrChemicalList[s]+'_NumSp'] = datadb[i]['NumSp'];
-                            newset[StrChemicalList[s]+'_NumAct'] = datadb[i]['NumAct'];
-                            newset[StrChemicalList[s]+'_NumTemp'] = datadb[i]['NumTemp'];
+                            // newset[StrChemicalList[s]+'_StrLotNum'] = datadb[i]['StrLotNum'];
+                            // newset[StrChemicalList[s]+'_StrBarcode'] = datadb[i]['StrBarcode'];
+                            // newset[StrChemicalList[s]+'_NumStep'] = datadb[i]['NumStep'];
+                            // newset[StrChemicalList[s]+'_NumSp'] = datadb[i]['NumSp'];
+                            // newset[StrChemicalList[s]+'_NumAct'] = datadb[i]['NumAct'];
+                            // newset[StrChemicalList[s]+'_NumTemp'] = datadb[i]['NumTemp'];
                            
                        
                         }
