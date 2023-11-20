@@ -179,7 +179,7 @@ router.post('/getweightlist', async (req, res) => {
                 }
 
                 if (start === 1 && datadb[i]['StrChemical'] !== 'END') {
-                    StrChemicalList.push(datadb[i]['StrChemical'].replace(" ", "").replace("    ", ""));
+                    StrChemicalList.push(datadb[i]['StrChemical'].replace(" ", "").replace("    ", "").replace("\n", ""));
                 } if (start > 1) {
                     break;
                 }
@@ -194,7 +194,7 @@ router.post('/getweightlist', async (req, res) => {
                     
                     for (let i = 0; i < datadb.length; i++) {
 
-                        if (polist[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s]===datadb[i]['StrChemical'].replace(" ", "").replace("    ", "")) {
+                        if (polist[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s]===datadb[i]['StrChemical'].replace(" ", "").replace("    ", "").replace("\n", "")) {
                             newset['RecordTimeStart'] = datadb[i]['RecordTimeStart'];
                             newset['PO'] = datadb[i]['NumOrder'];
                             newset[StrChemicalList[s]+'_StrLotNum'] = datadb[i]['StrLotNum'];
