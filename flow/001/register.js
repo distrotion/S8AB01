@@ -1114,6 +1114,7 @@ let day = d;
 
                 } else {
                     query = `INSERT  INTO [SOI8LOG].[dbo].[qcbypass_weight] ([POID],[COMMENT],[STATUS]) VALUES ('${input['PO']}','${input['COMMENT']}','HAVE')`
+                    let db = await mssqlR.qurey(query);
                     output = `The order have already had in DB`;
                 }
 
