@@ -164,7 +164,7 @@ router.post('/getweightlist', async (req, res) => {
             }
 
             let queryS = `SELECT * FROM [ScadaReport].[dbo].[LQprocessinfo] WHERE NumOrder in (${polist})  order by NumOrder  desc, RecordTimeStart  desc`
-            let db = await mssql.qurey(query);
+            let db = await mssql.qurey(queryS);
             console.log(db['recordsets'][0]);
         
         } else if (NOXRUST.length > 0) {
