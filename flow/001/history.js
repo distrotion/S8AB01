@@ -156,11 +156,11 @@ router.post('/getweightlist', async (req, res) => {
         } else if (POWDER.length > 0) {
 
         } else if (LIQUID.length > 0) {
-            let LIQUIDpo = await mongodb.findnolim(LIQUIDdbMAIN, dbinMAIN, { "MATNO": MATCP }, { "PO": 1 });
+            let GETPO = await mongodb.findnolim(LIQUIDdbMAIN, dbinMAIN, { "MATNO": MATCP }, { "PO": 1 });
 
             let polist = [];
-            for (let i = 0; i < LIQUIDpo.length; i++) {
-                polist.push(`'${LIQUIDpo[i]['PO']}'`)
+            for (let i = 0; i < GETPO.length; i++) {
+                polist.push(`'${GETPO[i]['PO']}'`)
 
             }
 
@@ -169,14 +169,15 @@ router.post('/getweightlist', async (req, res) => {
             // console.log(db['recordsets'][0]);
             let datadb = db['recordsets'][0];
             let StrChemicalList = [];
+            let DATAOUTPUT = [];
             let start = 0;
             for (let i = 0; i < datadb.length; i++) {
                 console.log(datadb[i]['StrChemical']);
-           
+
                 if (datadb[i]['StrChemical'] === 'END') {
                     start++;
                 }
-            
+
                 if (start === 1 && datadb[i]['StrChemical'] !== 'END') {
                     StrChemicalList.push(datadb[i]['StrChemical']);
                 } if (start > 1) {
@@ -185,7 +186,31 @@ router.post('/getweightlist', async (req, res) => {
 
             }
 
-            output = datadb;
+            for (let k = 0; k < GETPO.length; k++) {
+                for (let s = 0; s < StrChemicalList.length; s++) {
+                    let newset = {
+                        
+                    };
+                    for (let i = 0; i < datadb.length; i++) {
+
+                        if (GETPO[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s]===datadb[i]['StrChemical']) {
+                            newset['RecordTimeStart'] = datadb[i]['RecordTimeStart'];
+                            newset['PO'] = GETPO[k];
+                            newset[StrChemicalList[s]+'_StrLotNum'] = datadb[i]['StrLotNum'];
+                            newset[StrChemicalList[s]+'_StrBarcode'] = datadb[i]['StrBarcode'];
+                            newset[StrChemicalList[s]+'_NumStep'] = datadb[i]['NumStep'];
+                            newset[StrChemicalList[s]+'_NumSp'] = datadb[i]['NumSp'];
+                            newset[StrChemicalList[s]+'_NumAct'] = datadb[i]['NumAct'];
+                            newset[StrChemicalList[s]+'_NumTemp'] = datadb[i]['NumTemp'];
+                           
+                       
+                        }
+                    }
+                }
+                DATAOUTPUT.push(newset);
+            }
+
+            output = DATAOUTPUT;
 
         } else if (NOXRUST.length > 0) {
 
