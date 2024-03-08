@@ -161,8 +161,6 @@ router.post('/getweightlist', async (req, res) => {
             let polist = [];
             for (let i = 0; i < GETPO.length; i++) {
                 polist.push(`'${GETPO[i]['PO']}'`)
-              
-
             }
 
             let queryS = `SELECT * FROM [ScadaReport].[dbo].[LQprocessinfo] WHERE NumOrder in (${polist})  order by NumOrder  desc, RecordTimeStart  desc`
@@ -186,28 +184,28 @@ router.post('/getweightlist', async (req, res) => {
                 }
 
             }
-       
+
             for (let k = 0; k < polist.length; k++) {
                 let newset = {
-                        
+
                 };
                 for (let s = 0; s < StrChemicalList.length; s++) {
-                    
+
                     for (let i = 0; i < datadb.length; i++) {
 
-                        if (polist[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s]===datadb[i]['StrChemical'].replace(" ", "").replace("    ", "").replace("\n", "")) {
+                        if (polist[k] === `'${datadb[i]['NumOrder']}'` && StrChemicalList[s] === datadb[i]['StrChemical'].replace(" ", "").replace("    ", "").replace("\n", "")) {
                             newset['RecordTimeStart'] = datadb[i]['RecordTimeStart'];
                             newset['PO'] = datadb[i]['NumOrder'];
                             newset['MATNO'] = input['MATNO'];
-                            newset[StrChemicalList[s]+'_StrLotNum'] = datadb[i]['StrLotNum'];
-                            newset[StrChemicalList[s]+'_StrBarcode'] = datadb[i]['StrBarcode'];
-                            newset[StrChemicalList[s]+'_NumStep'] = datadb[i]['NumStep'];
-                            newset[StrChemicalList[s]+'_NumSp'] = datadb[i]['NumSp'];
-                            newset[StrChemicalList[s]+'_NumAct'] = datadb[i]['NumAct'];
-                            newset[StrChemicalList[s]+'_NumTemp'] = datadb[i]['NumTemp'];
-                           
+                            newset[StrChemicalList[s] + '_StrLotNum'] = datadb[i]['StrLotNum'];
+                            newset[StrChemicalList[s] + '_StrBarcode'] = datadb[i]['StrBarcode'];
+                            newset[StrChemicalList[s] + '_NumStep'] = datadb[i]['NumStep'];
+                            newset[StrChemicalList[s] + '_NumSp'] = datadb[i]['NumSp'];
+                            newset[StrChemicalList[s] + '_NumAct'] = datadb[i]['NumAct'];
+                            newset[StrChemicalList[s] + '_NumTemp'] = datadb[i]['NumTemp'];
+
                             break;
-                       
+
                         }
                     }
                 }
@@ -215,8 +213,8 @@ router.post('/getweightlist', async (req, res) => {
             }
 
             output = {
-                "list":StrChemicalList,
-                "DATA":DATAOUTPUT
+                "list": StrChemicalList,
+                "DATA": DATAOUTPUT
             };
 
         } else if (NOXRUST.length > 0) {
@@ -234,4 +232,121 @@ router.post('/getweightlist', async (req, res) => {
 });
 
 
-module.exports = router;
+router.post('/GetWeighBYTANK', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+    let day = d;
+    //-------------------------------------
+    console.log(req.body);
+    let input = req.body;
+    //-------------------------------------
+    let output = [];
+    try {
+        if (input['TANK'] != undefined && input['STARTyear'] != undefined && input['STARTmonth'] != undefined && input['STARTday'] != undefined && input['ENDyear'] != undefined && input['ENDmonth'] != undefined && input['ENDday'] != undefined) {
+
+            let queryS = `SELECT *
+        FROM [ScadaReport].[dbo].[LQprocessinfo] where StrChemical = 'END' and StrLotNum = '${input['TANK']}' and ( RecordTimeStart between '${input['STARTyear']}-${input['STARTmonth']}-${input['STARTday']} 00:00:00' and '${input['ENDyear']}-${input['ENDmonth']}-${input['ENDday']} 23:59:59' ) order by RecordTimeStart desc`
+            let db = await mssql.qurey(queryS);
+
+
+
+
+            let datadb = db['recordsets'][0];
+
+            let orderlist = [];
+            for (let i = 0; i < datadb.length; i++) {
+                orderlist.push(
+                    datadb[i]['NumOrder']
+                )
+            }
+
+            let queryout = `SELECT  *
+        FROM [ScadaReport].[dbo].[LQprocessinfo]  WHERE NumOrder in (${orderlist})  order by NumOrder  desc , RecordTimeStart desc`
+            let queryouts = await mssql.qurey(queryout);
+            let queryoutss = queryouts['recordsets'][0];
+
+            // output = queryoutss;
+
+            let StrChemicalList = [];
+            let DATAOUTPUT = [];
+            let start = 0
+
+            for (let i = 0; i < queryoutss.length; i++) {
+                // console.log(queryoutss[i]['StrChemical']);
+
+                if (queryoutss[i]['StrChemical'] === 'END') {
+                    start++;
+                }
+
+                if (start === 1 && queryoutss[i]['StrChemical'] !== 'END') {
+                    StrChemicalList.push(queryoutss[i]['StrChemical'].replace(" ", "").replace("    ", "").replace("\n", ""));
+                } if (start > 1) {
+                    break;
+                }
+
+            }
+
+            for (let k = 0; k < orderlist.length; k++) {
+                let newset = {
+
+                };
+                for (let s = 0; s < StrChemicalList.length; s++) {
+
+                    for (let i = 0; i < queryoutss.length; i++) {
+
+
+                        // console.log(queryoutss[i]['NumOrder'])
+                        if (`'${orderlist[k]}'` === `'${queryoutss[i]['NumOrder']}'` && StrChemicalList[s] === queryoutss[i]['StrChemical'].replace(" ", "").replace("    ", "").replace("\n", "")) {
+                            // console.log("----->")
+                            newset['RecordTimeStart'] = queryoutss[i]['RecordTimeStart'];
+                            newset['PO'] = queryoutss[i]['NumOrder'];
+                            newset['MATNO'] = input['MATNO'];
+                            newset[StrChemicalList[s] + '_StrLotNum'] = queryoutss[i]['StrLotNum'];
+                            newset[StrChemicalList[s] + '_StrBarcode'] = queryoutss[i]['StrBarcode'];
+                            newset[StrChemicalList[s] + '_NumStep'] = queryoutss[i]['NumStep'];
+                            newset[StrChemicalList[s] + '_NumSp'] = queryoutss[i]['NumSp'];
+                            newset[StrChemicalList[s] + '_NumAct'] = queryoutss[i]['NumAct'];
+                            newset[StrChemicalList[s] + '_NumTemp'] = queryoutss[i]['NumTemp'];
+
+                            break;
+
+                        }
+                    }
+                }
+                DATAOUTPUT.push(newset);
+            }
+
+            // output = {
+            //     "list": StrChemicalList,
+            //     "DATA": DATAOUTPUT,
+            //     // "listorder":orderlist
+            // };
+            output = DATAOUTPUT;
+
+
+
+        }
+
+    } catch (err) {
+        output = {
+            "list": [],
+            "DATA": [],
+            // "listorder":orderlist
+        };
+    }
+
+
+
+    res.json(output);
+});
+
+
+
+
+                            module.exports = router;
+
+
+// SELECT *
+//   FROM [ScadaReport].[dbo].[LQprocessinfo] where StrChemical = 'END' and StrLotNum = 'RT03' and RecordTimeStart between '2023/12/01' and '2023/12/20' order by RecordTimeStart desc
+
+// SELECT  *
+//   FROM [ScadaReport].[dbo].[LQprocessinfo]  WHERE NumOrder in ('217885','217883','217816')  order by NumOrder  desc , RecordTimeStart desc

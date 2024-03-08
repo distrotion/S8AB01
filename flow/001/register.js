@@ -1139,4 +1139,134 @@ let day = d;
     res.json(output);
 });
 
+
+
+router.post('/RegisterPOAP-getplant-name', async (req, res) => {
+    let d = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });;
+let day = d;
+    //-------------------------------------
+    console.log(req.body);
+    let input = req.body;
+    //-------------------------------------
+    let output = '';
+
+    try {
+
+        let MATCP = input['PO'].substring(0, 8);
+        let PO = input['PO'].substring(12, 18);
+
+        let PREMIX = await mongodb.find(PREMIXserver, dbin, { "MATNO": MATCP });
+        let COILCOATING = await mongodb.find(COILCOATINGserver, dbin, { "MATNO": MATCP });
+        let HYDROPHILIC = await mongodb.find(HYDROPHILICserver, dbin, { "MATNO": MATCP });
+        let PLX = await mongodb.find(PLXserver, dbin, { "MATNO": MATCP });
+        let TRITRATING = await mongodb.find(TRITRATINGserver, dbin, { "MATNO": MATCP });
+        let POWDER = await mongodb.find(POWDERserver, dbin, { "MATNO": MATCP });
+        let LIQUID = await mongodb.find(LIQUIDserver, dbin, { "MATNO": MATCP });
+        let NOXRUST = await mongodb.find(NOXRUSTserver, dbin, { "MATNO": MATCP });
+
+        let data = {
+            "PLANT": "NOdata",
+            "STATUS": "ORDER AGAIN"
+        };
+
+        if (TRITRATING.length > 0) {
+            data = {
+                "MATCP": MATCP,
+                "PO": PO,
+                "PLANT": "TRITRATING",
+                "MASTERdb": TRITRATINGserver,
+                "MATDATA": TRITRATING[0],
+                "ProductName": TRITRATING[0]['ProductName'],
+            };
+        } else if (COILCOATING.length > 0) {
+            data = {
+                "MATCP": MATCP,
+                "PO": PO,
+                "PLANT": "COILCOATING",
+                "MASTERdb": COILCOATINGserver,
+                "MATDATA": COILCOATING[0],
+                "ProductName": COILCOATING[0]['ProductName'],
+            };
+        } else if (HYDROPHILIC.length > 0) {
+            data = {
+                "MATCP": MATCP,
+                "PO": PO,
+                "PLANT": "HYDROPHILIC",
+                "MASTERdb": HYDROPHILICserver,
+                "MATDATA": HYDROPHILIC[0],
+                "ProductName": HYDROPHILIC[0]['ProductName'],
+            };
+        } else if (PLX.length > 0) {
+            data = {
+                "MATCP": MATCP,
+                "PO": PO,
+                "PLANT": "PLX",
+                "MASTERdb": PLXserver,
+                "MATDATA": PLX[0],
+                "ProductName": PLX[0]['ProductName'],
+            };
+        } else if (PREMIX.length > 0) {
+            data = {
+                "MATCP": MATCP,
+                "PO": PO,
+                "PLANT": "PREMIX",
+                "MASTERdb": PREMIXserver,
+                "MATDATA": PREMIX[0],
+                "ProductName": PREMIX[0]['ProductName'],
+            };
+        } else if (POWDER.length > 0) {
+            data = {
+                "MATCP": MATCP,
+                "PO": PO,
+                "PLANT": "POWDER",
+                "MASTERdb": POWDERserver,
+                "MATDATA": POWDER[0],
+                "ProductName": POWDER[0]['ProductName'],
+            };
+        } else if (LIQUID.length > 0) {
+            data = {
+                "MATCP": MATCP,
+                "PO": PO,
+                "PLANT": "LIQUID",
+                "MASTERdb": LIQUIDserver,
+                "MATDATA": LIQUID[0],
+                "ProductName": LIQUID[0]['ProductName'],
+            };
+        } else if (NOXRUST.length > 0) {
+            data = {
+                "MATCP": MATCP,
+                "PO": PO,
+                "PLANT": "NOXRUST",
+                "MASTERdb": NOXRUSTserver,
+                "MATDATA": NOXRUST[0],
+                "ProductName": NOXRUST[0]['ProductName'],
+            };
+        } else {
+            output = 'The MAT NO. Incorrect';
+        }
+
+        let neworder = {
+            "POID": input['PO'],
+            "MATNO": MATCP,
+            "PO": PO,
+            "PLANT": data["PLANT"],
+            "ProductName": data["ProductName"],
+
+            // "MASTERdb": data["MASTERdb"],
+            // "SumStatus": "IP",
+            // "DEP": "STAFF"
+        };
+
+        output =neworder;
+
+      
+
+    }
+    catch (err) {
+        output = '';
+    }
+
+
+    res.json(output);
+});
 module.exports = router;
