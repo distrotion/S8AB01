@@ -4,7 +4,7 @@ const config = {
   password: "Parker789",
   database: "",
   // server: '172.101.5.12',
-  server: '172.101.5.9',
+  server: '172.101.5.6',
   pool: {
     // max: 10,
     // min: 0,
